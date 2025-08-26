@@ -10,7 +10,7 @@ export const DoubletDisplay: React.FC<DoubletDisplayProps> = ({ doublet }) => (
     <div>
         <h2>{doublet.title}</h2>
         {doublet.sources && (
-            <div>
+            <div style={{ display: "flex", gap: "2rem" }}>
                 {doublet.sources.map((source, idx) => (
                     <SourceDisplay key={idx} source={source} />
                 ))}
