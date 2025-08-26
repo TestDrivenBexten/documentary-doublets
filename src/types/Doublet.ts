@@ -5,11 +5,11 @@ export type Verse = {
 };
 
 export type Source = {
+    name: string;
     verses: Verse[];
 };
 
 export type Doublet = {
     title: string;
-    priestly_source?: Source;
-    yahwist_source?: Source;
+    sources: Source[];
 };
