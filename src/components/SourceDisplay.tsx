@@ -17,6 +17,8 @@ export const SourceDisplay: React.FC<SourceDisplayProps> = ({ source }) => (
                             ? { background: "#e6f2ff" }
                             : source.name === "J"
                             ? { background: "#e6ffe6" }
+                            : source.name === "E"
+                            ? { background: "#b3ffcc" }
                             : undefined
                     }
                 >

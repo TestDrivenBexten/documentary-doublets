@@ -7,7 +7,10 @@ const App: React.FC = () => {
     const [doublet, setDoublet] = useState<Doublet | null>(null);
 
     useEffect(() => {
-        fetch('/doublets/prophecy_of_isaac_birth.json')
+        // fetch('/doublets/prophecy_of_isaac_birth.json')
+        //     .then(res => res.json())
+        //     .then(setDoublet);
+        fetch('/doublets/water_from_rock_at_meribah.json')
             .then(res => res.json())
             .then(setDoublet);
     }, []);
