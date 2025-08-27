@@ -18,16 +18,22 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>Documentary Doublets</h1>
-      {doublets.length > 0 ? (
-        <DoubletList
-          doublets={doublets}
-          setSelectedDoublet={setSelectedDoublet}
-        />
-      ) : (
-        <div>Loading...</div>
-      )}
-      {selectedDoublet && <DoubletDisplay doublet={selectedDoublet} />}
+      <h1 style={{ textAlign: "center" }}>Documentary Doublets</h1>
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
+        <div style={{ minWidth: 320, maxWidth: 400, width: "100%", marginRight: "2rem" }}>
+          {doublets.length > 0 ? (
+            <DoubletList
+              doublets={doublets}
+              setSelectedDoublet={setSelectedDoublet}
+            />
+          ) : (
+            <div>Loading...</div>
+          )}
+        </div>
+        <div style={{ flex: 1 }}>
+          {selectedDoublet && <DoubletDisplay doublet={selectedDoublet} />}
+        </div>
+      </div>
     </div>
   );
 };
