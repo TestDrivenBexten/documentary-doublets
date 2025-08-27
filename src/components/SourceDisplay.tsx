@@ -6,21 +6,21 @@ type SourceDisplayProps = {
     source: Source;
 };
 
-export const SourceDisplay: React.FC<SourceDisplayProps> = ({ source }) => {
-    let background;
-    switch (source.name) {
+function getSourceBackground(sourceName: string) {
+    switch (sourceName) {
         case "P":
-            background = colors.sourceP;
-            break;
+            return colors.sourceP;
         case "J":
-            background = colors.sourceJ;
-            break;
+            return colors.sourceJ;
         case "E":
-            background = colors.sourceE;
-            break;
+            return colors.sourceE;
         default:
-            background = undefined;
+            return undefined;
     }
+}
+
+export const SourceDisplay: React.FC<SourceDisplayProps> = ({ source }) => {
+    const background = getSourceBackground(source.name);
     return (
         <div>
             <h3>{source.name} Source</h3>
