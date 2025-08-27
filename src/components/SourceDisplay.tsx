@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Source } from "../types/Doublet";
 import colors from "../colors";
@@ -10,7 +9,7 @@ type SourceDisplayProps = {
 export const SourceDisplay: React.FC<SourceDisplayProps> = ({ source }) => (
     <div>
         <h3>{source.name} Source</h3>
-        <ul style={{ border: "1px solid #ccc", borderRadius: "6px", padding: "1rem", margin: 0 }}>
+        <ul style={{ border: "1px solid #ccc", borderRadius: "6px", padding: "1rem", margin: 0, listStyle: "none" }}>
             {source.verses.map((v, i) => {
                 let background;
                 switch (source.name) {
@@ -29,7 +28,10 @@ export const SourceDisplay: React.FC<SourceDisplayProps> = ({ source }) => (
                 return (
                     <li
                         key={i}
-                        style={background ? { background } : undefined}
+                        style={{
+                            ...(background ? { background } : {}),
+                            marginBottom: "0.5em"
+                        }}
                     >
                         <strong>{v.chapter}:{v.verse}</strong> {v.text}
                     </li>
