@@ -26,7 +26,7 @@ const App: React.FC = () => {
     <div>
       <h1 style={{ textAlign: "center" }}>Documentary Doublets</h1>
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
-        <div style={{ minWidth: 320, maxWidth: 400, width: "100%", marginRight: "2rem" }}>
+        <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginRight: "2rem" }}>
           {doublets.length > 0 ? (
             <DoubletList
               doublets={doublets}

@@ -7,7 +7,7 @@ type DoubletListProps = {
 };
 
 export const DoubletList: React.FC<DoubletListProps> = ({ doublets, setSelectedDoublet }) => (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         {doublets.map((doublet, idx) => (
             <div
                 key={idx}
@@ -15,9 +15,11 @@ export const DoubletList: React.FC<DoubletListProps> = ({ doublets, setSelectedD
                     border: "1px solid #ccc",
                     borderRadius: "8px",
                     padding: "1rem",
-                    minWidth: "220px",
+                    width: "100%",
                     background: "#fafbfc",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                    boxSizing: "border-box",
+                    cursor: "pointer"
                 }}
                 onClick={() => setSelectedDoublet(doublet)}
             >
