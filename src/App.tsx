@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Doublet } from "./types/Doublet";
 import { DoubletList } from "./components/DoubletList";
 import { DoubletDisplay } from "./components/DoubletDisplay";
+import { Header } from "./components/Header";
 
 const App: React.FC = () => {
   // useState for a list of doublets
@@ -24,7 +25,12 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Documentary Doublets</h1>
+      {/* Google Fonts link for UnifrakturCook */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap"
+        rel="stylesheet"
+      />
+      <Header />
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
         <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginRight: "2rem" }}>
           {doublets.length > 0 ? (
