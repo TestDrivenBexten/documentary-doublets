@@ -10,10 +10,16 @@ const App: React.FC = () => {
   const [selectedDoublet, setSelectedDoublet] = useState<Doublet | null>(null);
 
   useEffect(() => {
-    // Example: fetch a single doublet for now
-    fetch("/doublets/water_from_rock_at_meribah.json")
+    // Fetch a list of filenames from an index file, then fetch all doublets
+    fetch("/doublets/index.json")
       .then((res) => res.json())
-      .then((doublet) => setDoublets([doublet]));
+      .then((filenames: string[]) => {
+        Promise.all(
+          filenames.map(filename =>
+            fetch(`/doublets/${filename}`).then(res => res.json())
+          )
+        ).then(setDoublets);
+      });
   }, []);
 
   return (
