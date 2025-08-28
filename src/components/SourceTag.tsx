@@ -2,7 +2,7 @@ import React from "react";
 import colors from "../colors";
 import { SourceName } from "../types/SourceTypes";
 
-const SourceTag: React.FC<{ name: SourceName; onClick?: (name: SourceName) => void }> = ({ name, onClick }) => {
+const SourceTag: React.FC<{ name: SourceName; onClick?: (name: SourceName) => void; selected?: boolean }> = ({ name, onClick, selected }) => {
     const bg = colors[`source${name}` as keyof typeof colors] || "#e0e7ef";
     return (
         <span
@@ -14,8 +14,9 @@ const SourceTag: React.FC<{ name: SourceName; onClick?: (name: SourceName) => vo
                 padding: "0.2em 0.8em",
                 fontSize: "0.85em",
                 fontWeight: 500,
-                border: "1px solid #bcd",
-                cursor: onClick ? "pointer" : undefined
+                border: selected ? "2px solid #345" : "1px solid #bcd",
+                cursor: onClick ? "pointer" : undefined,
+                opacity: selected === false ? 0.5 : 1
             }}
             onClick={onClick ? () => onClick(name) : undefined}
         >

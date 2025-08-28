@@ -10,26 +10,31 @@ type DoubletListProps = {
 };
 
 export const DoubletList: React.FC<DoubletListProps> = ({ doublets, setSelectedDoublet }) => {
-    const [filter, setFilter] = useState<SourceName | null>(null);
+    const [filter, setFilter] = useState<SourceName[]>([]);
 
-    // Filter doublets by selected source
-    const filteredDoublets = filter === null
+    // Filter doublets by selected sources
+    const filteredDoublets = filter.length === 0
         ? doublets
         : doublets.filter(d =>
-            d.sources && d.sources.some(src => src.name === filter)
+            d.sources && d.sources.some(src => filter.includes(src.name as SourceName))
         );
+
+    const sourceOptions = doublets
+        .flatMap(d => d.sources?.map(s => s.name as SourceName) ?? [])
+        .filter((v, i, a) => a.indexOf(v) === i);
+
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div>Source filter</div>
             <SourceDisplayFilter
-                options={doublets.flatMap(d => d.sources?.map(s => s.name as SourceName) ?? []).filter((v, i, a) => a.indexOf(v) === i)}
+                options={sourceOptions}
                 />
             {filteredDoublets.map((doublet, idx) => (
-            <DoubletCard
-                key={idx}
-                doublet={doublet}
-                onClick={() => setSelectedDoublet(doublet)}
-            />
+                <DoubletCard
+                    key={idx}
+                    doublet={doublet}
+                    onClick={() => setSelectedDoublet(doublet)}
+                />
             ))}
         </div>
     );
