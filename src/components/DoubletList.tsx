@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Doublet } from "../types/Doublet";
 import { DoubletCard } from "./DoubletCard";
-import { SourceFilter } from "../types/SourceTypes";
+import SourceDisplayFilter from "./SourceDisplayFilter";
+import { SourceName } from "../types/SourceTypes";
 
 type DoubletListProps = {
     doublets: Doublet[];
@@ -9,38 +10,26 @@ type DoubletListProps = {
 };
 
 export const DoubletList: React.FC<DoubletListProps> = ({ doublets, setSelectedDoublet }) => {
-    const [filter, setFilter] = useState<SourceFilter>("All");
+    const [filter, setFilter] = useState<SourceName | null>(null);
 
     // Filter doublets by selected source
-    const filteredDoublets = filter === "All"
+    const filteredDoublets = filter === null
         ? doublets
         : doublets.filter(d =>
-            d.sources && d.sources.some((src: any) => src.name === filter)
+            d.sources && d.sources.some(src => src.name === filter)
         );
-
-    // Array of source filters for dropdown
-    const sourceFilters: SourceFilter[] = ["All", "J", "E", "P"];
-
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {/* Dropdown filter */}
-            <select
-                value={filter}
-                onChange={e => setFilter(e.target.value as SourceFilter)}
-                style={{ marginBottom: "1rem", padding: "0.3em 0.7em", fontSize: "1em" }}
-            >
-                {sourceFilters.map(name => (
-                    <option key={name} value={name}>
-                        {name === "All" ? "All Sources" : name}
-                    </option>
-                ))}
-            </select>
-            {filteredDoublets.map((doublet, idx) => (
-                <DoubletCard
-                    key={idx}
-                    doublet={doublet}
-                    onClick={() => setSelectedDoublet(doublet)}
+            <div>Source filter</div>
+            <SourceDisplayFilter
+                options={doublets.flatMap(d => d.sources?.map(s => s.name as SourceName) ?? []).filter((v, i, a) => a.indexOf(v) === i)}
                 />
+            {filteredDoublets.map((doublet, idx) => (
+            <DoubletCard
+                key={idx}
+                doublet={doublet}
+                onClick={() => setSelectedDoublet(doublet)}
+            />
             ))}
         </div>
     );

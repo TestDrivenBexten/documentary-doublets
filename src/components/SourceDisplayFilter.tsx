@@ -1,12 +1,12 @@
 import React from "react";
-import { SourceFilter } from "./DoubletList";
+import { SourceName } from "../types/SourceTypes";
 import SourceTag from "./SourceTag";
 
 type SourceFilterProps = {
-    options?: SourceFilter[];
+    options?: SourceName[];
 };
 
-const defaultOptions: SourceFilter[] = ["All", "J", "E", "P"];
+const defaultOptions: SourceName[] = ["J", "E", "P"];
 
 const SourceDisplayFilter: React.FC<SourceFilterProps> = ({ options = defaultOptions }) => (
     <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
