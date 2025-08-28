@@ -21,9 +21,11 @@ export const DoubletDisplay: React.FC<DoubletDisplayProps> = ({ doublet }) => {
                         onChange={setFilter}
                     />
                     <div style={{ display: "flex", gap: "2rem" }}>
-                        {doublet.sources.map((source, idx) => (
-                            <SourceDisplay key={idx} source={source} />
-                        ))}
+                        {doublet.sources
+                            .filter(source => filter.includes(source.name))
+                            .map((source, idx) => (
+                                <SourceDisplay key={idx} source={source} />
+                            ))}
                     </div>
                 </>
             )}
