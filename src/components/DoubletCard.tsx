@@ -1,6 +1,6 @@
 import React from "react";
 import { Doublet } from "../types/Doublet";
-import colors from "../colors";
+import SourceTag from "./SourceTag";
 
 type DoubletCardProps = {
     doublet: Doublet;
@@ -25,27 +25,9 @@ export const DoubletCard: React.FC<DoubletCardProps> = ({ doublet, onClick }) =>
         {/* Source tags at the bottom */}
         {doublet.sources && doublet.sources.length > 0 && (
             <div style={{ marginTop: "1rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {doublet.sources.map((src, idx) => {
-                    const bg =
-                        colors[`source${src.name}` as keyof typeof colors] || "#e0e7ef";
-                    return (
-                        <span
-                            key={idx}
-                            style={{
-                                display: "inline-block",
-                                background: bg,
-                                color: "#345",
-                                borderRadius: "12px",
-                                padding: "0.2em 0.8em",
-                                fontSize: "0.85em",
-                                fontWeight: 500,
-                                border: "1px solid #bcd"
-                            }}
-                        >
-                            {src.name}
-                        </span>
-                    );
-                })}
+                {doublet.sources.map((src, idx) => (
+                    <SourceTag key={idx} name={src.name} />
+                ))}
             </div>
         )}
     </div>
