@@ -1,7 +1,8 @@
 import React from "react";
 import colors from "../colors";
+import { SourceName } from "../types/SourceTypes";
 
-const SourceTag: React.FC<{ name: string }> = ({ name }) => {
+const SourceTag: React.FC<{ name: SourceName }> = ({ name }) => {
     const bg = colors[`source${name}` as keyof typeof colors] || "#e0e7ef";
     return (
         <span

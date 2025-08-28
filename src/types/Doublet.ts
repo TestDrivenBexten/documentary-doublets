@@ -1,3 +1,5 @@
+import type { SourceName } from './SourceTypes';
+
 export type Verse = {
     chapter: number;
     verse: number;
@@ -5,7 +7,7 @@ export type Verse = {
 };
 
 export type Source = {
-    name: string;
+    name: SourceName;
     verses: Verse[];
 };
 

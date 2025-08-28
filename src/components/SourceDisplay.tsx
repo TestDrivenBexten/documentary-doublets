@@ -1,12 +1,13 @@
 import React from "react";
 import { Source } from "../types/Doublet";
+import { SourceName } from "../types/SourceTypes";
 import colors from "../colors";
 
 type SourceDisplayProps = {
     source: Source;
 };
 
-function getSourceBackground(sourceName: string) {
+function getSourceBackground(sourceName: SourceName) {
     switch (sourceName) {
         case "P":
             return colors.sourceP;
