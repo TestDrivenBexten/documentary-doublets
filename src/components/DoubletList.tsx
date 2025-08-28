@@ -19,15 +19,15 @@ export const DoubletList: React.FC<DoubletListProps> = ({ doublets, setSelectedD
             d.sources && d.sources.some(src => filter.includes(src.name as SourceName))
         );
 
-    const sourceOptions = doublets
-        .flatMap(d => d.sources?.map(s => s.name as SourceName) ?? [])
-        .filter((v, i, a) => a.indexOf(v) === i);
+    const sourceOptions = doublets.flatMap(d => d.sources?.map(s => s.name as SourceName) || [])
+        .filter((v, i, a) => a.indexOf(v) === i); // Unique source names
 
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div>Source filter</div>
             <SourceDisplayFilter
                 options={sourceOptions}
+                onChange={setFilter}
                 />
             {filteredDoublets.map((doublet, idx) => (
                 <DoubletCard
