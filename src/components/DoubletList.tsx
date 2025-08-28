@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Doublet } from "../types/Doublet";
 import { DoubletCard } from "./DoubletCard";
-
-// Define a type for source names
-export type SourceName = "J" | "E" | "P";
-// Define a type for filter options (including "All")
-export type SourceFilter = "All" | SourceName;
+import { SourceFilter } from "../types/SourceTypes";
 
 type DoubletListProps = {
     doublets: Doublet[];
