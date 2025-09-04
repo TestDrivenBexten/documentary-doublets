@@ -24,7 +24,7 @@ export const SourceDisplay: React.FC<SourceDisplayProps> = ({ source }) => {
     const background = getSourceBackground(source.name);
     return (
         <div>
-            <h3>{source.name} Source</h3>
+            <h3>{source.name} Source: {source.verseNumbering}</h3>
             <ul style={{ background, border: "1px solid #ccc", borderRadius: "6px", padding: "1rem", margin: 0, listStyle: "none" }}>
                 {source.verses.map((v, i) => (
                     <li

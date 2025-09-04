@@ -51,7 +51,6 @@ const App: React.FC = () => {
             alignSelf: "stretch"
           }}
         />
-        <DiffViewer />
         <div style={{ flex: 1 }}>
           {selectedDoublet && <DoubletDisplay doublet={selectedDoublet} />}
         </div>

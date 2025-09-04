@@ -3,6 +3,7 @@
   "sources": [
     {
       "name": "E",
+      "verseNumbering": "Exodus 17:2-7",
       "verses": [
         {
           "chapter": 17,
@@ -38,6 +39,7 @@
     },
     {
       "name": "P",
+      "verseNumbering": "Numbers 20:2-13",
       "verses": [
         {
           "chapter": 20,

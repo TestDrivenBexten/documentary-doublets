@@ -3,6 +3,7 @@
   "sources": [
     {
       "name": "P",
+      "verseNumbering": "Genesis 17:16-19",
       "verses": [
         {
           "chapter": 17,
@@ -28,6 +29,7 @@
     },
     {
       "name": "J",
+      "verseNumbering": "Genesis 18:10-14",
       "verses": [
         {
           "chapter": 18,

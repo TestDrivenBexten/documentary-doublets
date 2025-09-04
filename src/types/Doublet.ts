@@ -8,6 +8,7 @@ export type Verse = {
 
 export type Source = {
     name: SourceName;
+    verseNumbering: string; // e.g., "Genesis 16:1-14"
     verses: Verse[];
 };
 

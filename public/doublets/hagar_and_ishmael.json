@@ -3,6 +3,7 @@
   "sources": [
     {
       "name": "J",
+      "verseNumbering": "Genesis 16:1-2,4-14",
       "verses": [
         {
           "chapter": 16,
@@ -73,6 +74,7 @@
     },
     {
       "name": "P",
+      "verseNumbering": "Genesis 16:3,15-16",
       "verses": [
             {
             "chapter": 16,
@@ -93,6 +95,7 @@
     },
     {
       "name": "E",
+      "verseNumbering": "Genesis 21:8-19",
       "verses": [
             {
             "chapter": 21,
