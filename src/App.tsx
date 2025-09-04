@@ -12,12 +12,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Fetch a list of filenames from an index file, then fetch all doublets
-    fetch("/doublets/index.json")
+    fetch(`${import.meta.env.BASE_URL}doublets/index.json`)
       .then((res) => res.json())
       .then((filenames: string[]) => {
         Promise.all(
           filenames.map(filename =>
-            fetch(`/doublets/${filename}`).then(res => res.json())
+            fetch(`${import.meta.env.BASE_URL}doublets/${filename}`).then(res => res.json())
           )
         ).then(setDoublets);
       });
