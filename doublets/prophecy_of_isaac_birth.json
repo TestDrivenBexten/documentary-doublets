@@ -1,0 +1,62 @@
+{
+  "title": "Prophecy of Isaac's Birth",
+  "sources": [
+    {
+      "name": "P",
+      "verseNumbering": "Genesis 17:16-19",
+      "verses": [
+        {
+          "chapter": 17,
+          "verse": 16,
+          "text": "I will bless her and also give you a son by her. I will bless her, and she shall give rise to nations; kings of peoples shall come from her.'"
+        },
+        {
+          "chapter": 17,
+          "verse": 17,
+          "text": "Then Abraham fell on his face and laughed and said to himself, 'Can a child be born to a man who is a hundred years old? Can Sarah, who is ninety years old, bear a child?'"
+        },
+        {
+          "chapter": 17,
+          "verse": 18,
+          "text": "And Abraham said to God, 'O that Ishmael might live in your sight!'"
+        },
+        {
+          "chapter": 17,
+          "verse": 19,
+          "text": "God said, 'No, but your wife Sarah shall bear you a son, and you shall name him Isaac. I will establish my covenant with him as an everlasting covenant for his offspring after him."
+        }
+      ]
+    },
+    {
+      "name": "J",
+      "verseNumbering": "Genesis 18:10-14",
+      "verses": [
+        {
+          "chapter": 18,
+          "verse": 10,
+          "text": "Then one said, 'I will surely return to you in due season, and your wife Sarah shall have a son.' And Sarah was listening at the tent entrance behind him."
+        },
+        {
+          "chapter": 18,
+          "verse": 11,
+          "text": "Now Abraham and Sarah were old, advanced in age; it had ceased to be with Sarah after the manner of women."
+        },
+        {
+          "chapter": 18,
+          "verse": 12,
+          "text": "So Sarah laughed to herself, saying, 'After I have grown old, and my husband is old, shall I be fruitful?'"
+        },
+        {
+          "chapter": 18,
+          "verse": 13,
+          "text": "The Lord said to Abraham, 'Why did Sarah laugh and say, 'Shall I indeed bear a child, now that I am old?'"
+        },
+        {
+          "chapter": 18,
+          "verse": 14,
+          "text": "Is anything too wonderful for the Lord? At the set time I will return to you, in due season, and Sarah shall have a son.'"
+        }
+      ]
+    }
+  ]
+}
