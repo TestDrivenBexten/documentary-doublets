@@ -3,6 +3,7 @@ import { Doublet } from "./types/Doublet";
 import { DoubletList } from "./components/DoubletList";
 import { DoubletDisplay } from "./components/DoubletDisplay";
 import { Header } from "./components/Header";
+import DiffViewer from "./components/DiffViewer";
 
 const App: React.FC = () => {
   // useState for a list of doublets
@@ -50,6 +51,7 @@ const App: React.FC = () => {
             alignSelf: "stretch"
           }}
         />
+        <DiffViewer />
         <div style={{ flex: 1 }}>
           {selectedDoublet && <DoubletDisplay doublet={selectedDoublet} />}
         </div>
