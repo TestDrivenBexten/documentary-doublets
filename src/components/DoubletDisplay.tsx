@@ -3,7 +3,7 @@ import { Doublet } from "../types/Doublet";
 import { SourceDisplay } from "./SourceDisplay";
 import SourceDisplayFilter from "./SourceDisplayFilter";
 import { SourceName } from "../types/SourceTypes";
-import { sortSourceNames } from "../sortUtils";
+import { sortSourceNames, sortSourcesByName } from "../sortUtils";
 
 type DoubletDisplayProps = {
     doublet: Doublet;
@@ -29,9 +29,8 @@ export const DoubletDisplay: React.FC<DoubletDisplayProps> = ({ doublet }) => {
                         onChange={setFilter}
                     />
                     <div style={{ display: "flex", gap: "2rem" }}>
-                        {doublet.sources
+                        {sortSourcesByName(doublet.sources)
                             .filter(source => filter.includes(source.name))
-                            .sort((a, b) => sortSourceNames([a.name, b.name]).indexOf(a.name) - sortSourceNames([a.name, b.name]).indexOf(b.name))
                             .map((source, idx) => (
                                 <SourceDisplay key={idx} source={source} />
                             ))}
