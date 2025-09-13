@@ -1,6 +1,7 @@
 import React from "react";
 import { Doublet } from "../types/Doublet";
 import SourceTag from "./SourceTag";
+import { sortSourceNames } from "../sortUtils";
 
 type DoubletCardProps = {
     doublet: Doublet;
@@ -25,8 +26,8 @@ export const DoubletCard: React.FC<DoubletCardProps> = ({ doublet, onClick }) =>
         {/* Source tags at the bottom */}
         {doublet.sources && doublet.sources.length > 0 && (
             <div style={{ marginTop: "1rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {doublet.sources.map((src, idx) => (
-                    <SourceTag key={idx} name={src.name} />
+                {sortSourceNames(doublet.sources.map(src => src.name)).map((name, idx) => (
+                    <SourceTag key={idx} name={name} />
                 ))}
             </div>
         )}
