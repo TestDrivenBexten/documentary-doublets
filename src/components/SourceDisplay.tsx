@@ -15,6 +15,8 @@ function getSourceBackground(sourceName: SourceName) {
             return colors.sourceJ;
         case "E":
             return colors.sourceE;
+        case "D":
+            return colors.sourceD;
         default:
             return undefined;
     }
