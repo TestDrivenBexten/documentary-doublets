@@ -27,6 +27,7 @@ export const DoubletList: React.FC<DoubletListProps> = ({ doublets, setSelectedD
             <div>Source filter</div>
             <SourceDisplayFilter
                 options={sourceOptions}
+                selected={filter}
                 onChange={setFilter}
                 />
             {filteredDoublets.map((doublet, idx) => (

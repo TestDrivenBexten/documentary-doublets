@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SourceName } from "../types/SourceTypes";
 import SourceTag from "./SourceTag";
 
 type SourceFilterProps = {
     options?: SourceName[];
+    selected: SourceName[];
     onChange: (selected: SourceName[]) => void;
 };
 
 const defaultOptions: SourceName[] = ["J", "E", "P"];
 
-const SourceDisplayFilter: React.FC<SourceFilterProps> = ({ options = defaultOptions, onChange }) => {
-    const [selected, setSelected] = useState<SourceName[]>(options);
-    useEffect(() => {
-        onChange(selected);
-    }, [selected]);
-
+const SourceDisplayFilter: React.FC<SourceFilterProps> = ({ options = defaultOptions, selected, onChange }) => {
     const handleTagClick = (name: SourceName) => {
-        setSelected(prev => {
-            const next = prev.includes(name)
-                ? prev.filter(n => n !== name)
-                : [...prev, name];
-            return next;
-        });
+        const next = selected.includes(name)
+            ? selected.filter(n => n !== name)
+            : [...selected, name];
+        onChange(next);
     };
 
     return (

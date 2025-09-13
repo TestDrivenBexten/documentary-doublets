@@ -9,7 +9,12 @@ type DoubletDisplayProps = {
 };
 
 export const DoubletDisplay: React.FC<DoubletDisplayProps> = ({ doublet }) => {
-    const [filter, setFilter] = useState<SourceName[]>([]);
+    const sourceNames = doublet.sources?.map(s => s.name) || [];
+    const [filter, setFilter] = useState<SourceName[]>(sourceNames);
+
+    React.useEffect(() => {
+        setFilter(sourceNames);
+    }, [doublet]);
 
     return (
         <div>
@@ -17,7 +22,8 @@ export const DoubletDisplay: React.FC<DoubletDisplayProps> = ({ doublet }) => {
             {doublet.sources && (
                 <>
                     <SourceDisplayFilter
-                        options={doublet.sources.map(s => s.name)}
+                        options={sourceNames}
+                        selected={filter}
                         onChange={setFilter}
                     />
                     <div style={{ display: "flex", gap: "2rem" }}>
