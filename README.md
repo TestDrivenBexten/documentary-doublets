@@ -1,5 +1,7 @@
 # Documentary Doublets
 
+[View the app on GitHub Pages](https://TestDrivenBexten.github.io/documentary-doublets/)
+
 Documentary Doublets is a TypeScript React application designed to showcase a simple example of a React project structure. This project serves as a template for building more complex applications.
 
 ## Getting Started
