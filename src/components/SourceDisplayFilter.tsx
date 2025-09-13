@@ -1,6 +1,7 @@
 import React from "react";
 import { SourceName } from "../types/SourceTypes";
 import SourceTag from "./SourceTag";
+import { sortSourceNames } from "../sortUtils";
 
 type SourceFilterProps = {
     options?: SourceName[];
@@ -11,6 +12,7 @@ type SourceFilterProps = {
 const defaultOptions: SourceName[] = ["J", "E", "P"];
 
 const SourceDisplayFilter: React.FC<SourceFilterProps> = ({ options = defaultOptions, selected, onChange }) => {
+    const sortedOptions = sortSourceNames(options);
     const handleTagClick = (name: SourceName) => {
         const next = selected.includes(name)
             ? selected.filter(n => n !== name)
@@ -20,7 +22,7 @@ const SourceDisplayFilter: React.FC<SourceFilterProps> = ({ options = defaultOpt
 
     return (
         <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
-            {options.map(opt => (
+            {sortedOptions.map(opt => (
                 <SourceTag
                     key={opt}
                     name={opt}
