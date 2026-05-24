@@ -25,7 +25,6 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {/* Google Fonts link for UnifrakturCook */}
       <Header />
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
         <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginRight: "2rem" }}>
