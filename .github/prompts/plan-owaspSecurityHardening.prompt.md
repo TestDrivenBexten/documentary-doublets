@@ -71,27 +71,6 @@ Notes:
 
 Note: `X-Frame-Options` as a meta tag is not enforced by browsers — it requires an HTTP header. Included here for intent; enforced via Vite dev server headers (Phase 2).
 
-### 1.3 Move Google Fonts `<link>` from App.tsx JSX to `index.html` `<head>`
-
-**Remove** from `src/App.tsx` JSX:
-```tsx
-<link
-  href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap"
-  rel="stylesheet"
-/>
-```
-
-**Add** to `index.html` `<head>`:
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap"
-  rel="stylesheet"
-  referrerpolicy="no-referrer"
->
-```
-
 ---
 
 ## Phase 2 — Vite Dev Server Headers
