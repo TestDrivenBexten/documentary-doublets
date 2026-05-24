@@ -91,14 +91,21 @@ server: {
 
 ---
 
-## Phase 3 — Dependency Upgrades
+## Phase 3 — Dependency Upgrades ✅
 *(OWASP A06 — Vulnerable and Outdated Components)*
 
-1. Upgrade `typescript` from `^4.4.4` → `^5.x` (latest stable)
-2. Upgrade `vite` from `^4.4.9` → `^5.x`
-3. Check `@vitejs/plugin-react` — currently `^4.0.0`; verify compatibility with Vite 5 and upgrade if needed
-4. After upgrading, run `npm audit` and resolve any remaining high/critical findings
-5. Run the app and confirm no TypeScript or build errors
+Completed. Final installed versions:
+
+| Package | Before | After |
+|---|---|---|
+| `typescript` | `^4.4.4` | `6.0.3` |
+| `vite` | `^4.4.9` | `8.0.14` |
+| `@vitejs/plugin-react` | `^4.0.0` | `6.0.2` |
+| `@types/react` | `^18.2.41` | `19.2.15` |
+| `@types/react-dom` | `^18.2.17` | `19.2.3` |
+
+Also resolved: `picomatch ≤2.3.1` (high — ReDoS + POSIX glob injection) via `npm audit fix`.
+`npm audit` now reports **0 vulnerabilities**. `npm run build` passes (Vite 8 / 23 modules).
 
 ---
 
