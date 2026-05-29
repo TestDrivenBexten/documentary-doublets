@@ -1,5 +1,5 @@
-import React from "react";
-import { LexiconEntry, LexiconSense } from "../types";
+import React, { useState } from "react";
+import { LexiconEntry, LexiconSense, ParentLexicon } from "../types";
 
 function stripHtml(html: string): string {
     return html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
@@ -17,6 +17,13 @@ function collectDefinitions(senses: LexiconSense[], depth = 0, maxDepth = 1): st
     }
     return defs;
 }
+
+const LEXICON_TABS: { lexicon: ParentLexicon; label: string }[] = [
+    { lexicon: ParentLexicon.BdbDictionary,      label: "BDB"     },
+    { lexicon: ParentLexicon.BdbAugmentedStrong, label: "BDB+"    },
+    { lexicon: ParentLexicon.KleinDictionary,    label: "Klein"   },
+    { lexicon: ParentLexicon.JastrowDictionary,  label: "Jastrow" },
+];
 
 type LexiconEntryDisplayProps = {
     entry: LexiconEntry;
@@ -49,11 +56,42 @@ type LexiconDisplayProps = {
 };
 
 export const LexiconDisplay: React.FC<LexiconDisplayProps> = ({ entries }) => {
+    const [selected, setSelected] = useState<ParentLexicon>(ParentLexicon.BdbDictionary);
+
+    const activeEntry = entries.find((e) => e.parent_lexicon === selected) ?? null;
+
     return (
-        <>
-            {entries.map((entry, i) => (
-                <LexiconEntryDisplay key={i} entry={entry} />
-            ))}
-        </>
+        <div>
+            <div style={{ display: "flex", gap: "0.25rem", flexWrap: "wrap", borderBottom: "1px solid #ddd", marginBottom: "0.25rem" }}>
+                {LEXICON_TABS.map(({ lexicon, label }) => {
+                    const available = entries.some((e) => e.parent_lexicon === lexicon);
+                    const isActive = selected === lexicon;
+                    return (
+                        <button
+                            key={lexicon}
+                            onClick={() => setSelected(lexicon)}
+                            disabled={!available}
+                            style={{
+                                padding: "0.25rem 0.5rem",
+                                fontSize: "0.8rem",
+                                background: "none",
+                                border: "none",
+                                borderBottom: isActive ? "2px solid #333" : "2px solid transparent",
+                                marginBottom: "-1px",
+                                fontWeight: isActive ? "bold" : "normal",
+                                color: available ? (isActive ? "#333" : "#555") : "#bbb",
+                                cursor: available ? "pointer" : "default",
+                            }}
+                        >
+                            {label}
+                        </button>
+                    );
+                })}
+            </div>
+            {activeEntry
+                ? <LexiconEntryDisplay entry={activeEntry} />
+                : <div style={{ fontSize: "0.85rem", color: "#888", paddingTop: "0.5rem" }}>Not available in this lexicon.</div>
+            }
+        </div>
     );
 };

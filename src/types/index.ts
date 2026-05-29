@@ -26,6 +26,14 @@ export type SefariaV3TextResponse = {
     versions: SefariaV3TextVersion[];
 };
 
+/** Lexicons returned by GET /api/words/{word} */
+export enum ParentLexicon {
+    BdbAugmentedStrong = "BDB Augmented Strong",
+    BdbDictionary = "BDB Dictionary",
+    KleinDictionary = "Klein Dictionary",
+    JastrowDictionary = "Jastrow Dictionary",
+}
+
 /** Recursive sense node from GET /api/words/{word} — may contain HTML in `definition` */
 export type LexiconSense = {
     definition?: string;
@@ -36,7 +44,7 @@ export type LexiconSense = {
 /** One dictionary's entry for a Hebrew word */
 export type LexiconEntry = {
     headword: string;
-    parent_lexicon: string;
+    parent_lexicon: ParentLexicon | string;
     transliteration?: string;
     pronunciation?: string;
     morphology?: string;
