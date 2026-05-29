@@ -48,6 +48,16 @@ const App: React.FC = () => {
         <div style={{ flex: 1 }}>
           {selectedDoublet && <DoubletDisplay doublet={selectedDoublet} />}
         </div>
+        {/* Fragmented vertical line */}
+        <div
+          style={{
+            borderLeft: "2px dashed #888",
+            marginLeft: "2rem",
+            alignSelf: "stretch"
+          }}
+        />
+        <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginLeft: "2rem" }}>
+        </div>
       </div>
     </div>
   );
