@@ -91,7 +91,7 @@ Exports and internals:
 
 Style matches existing `sortUtils.ts` — plain exported functions, no class.
 
-### Phase 2b — Hebrew word definition lookup (*parallel with Phase 2*)
+### Phase 2b — Hebrew word definition lookup (*parallel with Phase 2*) ✅
 
 **Extend `src/services/sefariaService.ts`** (or add alongside Phase 2 in the same file):
 

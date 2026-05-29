@@ -3,6 +3,7 @@ import { Doublet } from "./types/Doublet";
 import { DoubletList } from "./components/DoubletList";
 import { DoubletDisplay } from "./components/DoubletDisplay";
 import { Header } from "./components/Header";
+import { HebrewLookup } from "./components/HebrewLookup";
 
 const App: React.FC = () => {
   // useState for a list of doublets
@@ -57,6 +58,7 @@ const App: React.FC = () => {
           }}
         />
         <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginLeft: "2rem" }}>
+          <HebrewLookup />
         </div>
       </div>
     </div>

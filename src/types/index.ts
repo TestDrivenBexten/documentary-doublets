@@ -25,3 +25,20 @@ export type SefariaV3TextResponse = {
     /** Requested version(s) with their text content */
     versions: SefariaV3TextVersion[];
 };
+
+/** Recursive sense node from GET /api/words/{word} — may contain HTML in `definition` */
+export type LexiconSense = {
+    definition?: string;
+    num?: string;
+    senses?: LexiconSense[];
+};
+
+/** One dictionary's entry for a Hebrew word */
+export type LexiconEntry = {
+    headword: string;
+    parent_lexicon: string;
+    transliteration?: string;
+    pronunciation?: string;
+    morphology?: string;
+    senses: LexiconSense[];
+};
