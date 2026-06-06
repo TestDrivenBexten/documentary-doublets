@@ -4,12 +4,14 @@ import { DoubletList } from "./components/DoubletList";
 import { DoubletDisplay } from "./components/DoubletDisplay";
 import { Header } from "./components/Header";
 import { HebrewLookup } from "./components/HebrewLookup";
+import { TextLookup } from "./components/TextLookup";
 
 const App: React.FC = () => {
   // useState for a list of doublets
   const [doublets, setDoublets] = useState<Doublet[]>([]);
   // useState for the selected doublet
   const [selectedDoublet, setSelectedDoublet] = useState<Doublet | null>(null);
+  const [activePanel, setActivePanel] = useState<"word" | "text">("word");
 
   useEffect(() => {
     // Fetch a list of filenames from an index file, then fetch all doublets
@@ -58,7 +60,31 @@ const App: React.FC = () => {
           }}
         />
         <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginLeft: "2rem" }}>
-          <HebrewLookup />
+          <div style={{ display: "flex", gap: "0.25rem", borderBottom: "1px solid #ddd", marginBottom: "0.75rem" }}>
+            {(["word", "text"] as const).map((panel) => {
+              const isActive = activePanel === panel;
+              return (
+                <button
+                  key={panel}
+                  onClick={() => setActivePanel(panel)}
+                  style={{
+                    padding: "0.25rem 0.5rem",
+                    fontSize: "0.85rem",
+                    background: "none",
+                    border: "none",
+                    borderBottom: isActive ? "2px solid #333" : "2px solid transparent",
+                    marginBottom: "-1px",
+                    fontWeight: isActive ? "bold" : "normal",
+                    color: isActive ? "#333" : "#555",
+                    cursor: "pointer",
+                  }}
+                >
+                  {panel === "word" ? "Word Lookup" : "Text Lookup"}
+                </button>
+              );
+            })}
+          </div>
+          {activePanel === "word" ? <HebrewLookup /> : <TextLookup />}
         </div>
       </div>
     </div>

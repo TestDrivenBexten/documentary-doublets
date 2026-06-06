@@ -32,7 +32,9 @@ export async function fetchVerseTexts(
   const startVerse = parseInt(versePart.split("-")[0], 10);
 
   const encoded = encodeURIComponent(ref);
-  const res = await fetch(`${BASE_URL}/api/v3/texts/${encoded}`);
+  const res = await fetch(
+    `${BASE_URL}/api/v3/texts/${encoded}?version=english&version=hebrew`
+  );
   if (!res.ok) {
     throw new Error(`Sefaria API error: ${res.status} ${res.statusText}`);
   }
