@@ -206,3 +206,79 @@ Style matches existing `sortUtils.ts` — plain exported functions, no class.
 ## Security Note
 
 When implementing the OWASP plan alongside this, update `connect-src` in the CSP meta tag and Vite dev server headers from `'self'` to `'self' https://www.sefaria.org`.
+---
+
+## Phase 5 — TextLookup Component & Right-Column Panel Toggle
+
+### Goal
+
+Add a `TextLookup` component that fetches and displays a Sefaria passage by ref, with an English/Hebrew toggle. Place it in the existing right column alongside `HebrewLookup`, with a panel switcher letting the user show either the word lookup or the text lookup at a time.
+
+---
+
+### New component: `src/components/TextLookup.tsx`
+
+**State:**
+- `query: string` — ref input (human-readable, e.g. `Genesis 16:1-14`)
+- `isLoading: boolean`
+- `error: string | null`
+- `verseMap: Map<number, VerseTexts> | null` — result from `fetchVerseTexts`
+- `showHebrew: boolean` — language toggle, default `false` (English)
+
+**Behavior:**
+- Form with a single text input (placeholder: `"e.g. Genesis 16:1-14"`) and a submit button; calls `fetchVerseTexts(query)` from `sefariaService` on submit. Input accepts human-friendly format (`Genesis 16:1-14`) — `fetchVerseTexts` runs it through `buildApiRef` internally; no raw Sefaria ref format is exposed to the user.
+- While loading: disable form, show `"…"` label on button.
+- On error: show inline error string (same pattern as `HebrewLookup`).
+- On success: render an ordered verse list. Each verse renders either `text` (English) or `heText` (Hebrew) based on `showHebrew`.
+- Hebrew display: `dir="rtl"`, `fontSize: "1.1rem"` to match `HebrewLookup` input style.
+- Language toggle: EN / HE button pair rendered above the verse list, only visible when `verseMap` is non-null.
+- If `heText` is empty for a verse (API offline fallback path), display `text` even when in Hebrew mode.
+
+**No new service calls** — reuses `fetchVerseTexts(verseNumbering)` from Phase 2.
+
+---
+
+### Modify `src/App.tsx`
+
+**Add `activePanel` state:** `'word' | 'text'`, default `'word'`.
+
+**Right column layout change:**
+- Replace bare `<HebrewLookup />` with:
+  - Tab strip (above the panel content):
+    - "Word Lookup" tab — sets `activePanel` to `'word'`
+    - "Text Lookup" tab — sets `activePanel` to `'text'`
+    - Active tab style: `borderBottom: "2px solid #333"`, `fontWeight: "bold"`, matching the lexicon tab style in `LexiconDisplay`
+  - Conditional render below the tab strip:
+    - `activePanel === 'word'` → `<HebrewLookup />`
+    - `activePanel === 'text'` → `<TextLookup />`
+- Add `import { TextLookup } from "./components/TextLookup"` alongside the existing `HebrewLookup` import.
+- No changes to column widths, dividers, or any other layout.
+
+---
+
+### Files to Modify / Create
+
+| File | Action | What changes |
+|---|---|---|
+| `src/components/TextLookup.tsx` | **Create** | New component (see above) |
+| `src/App.tsx` | Modify | `activePanel` state + tab strip + conditional render in right column |
+
+---
+
+### Verification
+
+1. **Panel toggle**: Clicking "Text Lookup" tab hides `HebrewLookup` and shows `TextLookup`; clicking "Word Lookup" restores it.
+2. **Fetch works**: Enter `Genesis 16:1-14` → click Look up → verses appear in English.
+3. **Language toggle**: Toggle to HE → verses switch to Hebrew with `dir="rtl"` applied.
+4. **Empty heText fallback**: When Sefaria is offline, English fallback text renders in Hebrew mode without crashing.
+5. **Error state**: Bad ref (e.g. `Zzz 99:1`) → inline error shown, no crash.
+6. **TypeScript**: `npm run build` — no type errors.
+
+---
+
+### Out of Scope (this phase)
+
+- Pre-populating TextLookup ref from the currently selected doublet's `verseNumbering`
+- Persisting active panel between sessions
+- Sharing state between the two lookup panels
+- Verse highlighting or selection within TextLookup
