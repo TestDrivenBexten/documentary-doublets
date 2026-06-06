@@ -194,7 +194,7 @@ Style matches existing `sortUtils.ts` — plain exported functions, no class.
 ## Out of Scope
 
 - Displaying Hebrew verse text in the UI (follow-up task — requires RTL layout changes in `SourceDisplay.tsx`)
-- Displaying word definitions in the UI (follow-up task — requires a popover/tooltip component, HTML sanitization of sense definitions, and lexicon selection UX)
+- Improving word definitions UX (popover/tooltip, HTML sanitization of sense definitions, and lexicon selection refinements)
 - HTML sanitization of `LexiconSense.definition` values (service returns raw; sanitization belongs in the display layer)
 - Multi-chapter refs (no current doublet spans chapters)
 - Translation version selection UI
