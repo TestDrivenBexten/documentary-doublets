@@ -28,3 +28,9 @@ pnpm-debug.log*
 
 # OS
 Thumbs.db
+
+# Sefaria API
+.api/
+
+# Scratch pad
+notes.txt
