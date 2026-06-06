@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const [doublets, setDoublets] = useState<Doublet[]>([]);
   // useState for the selected doublet
   const [selectedDoublet, setSelectedDoublet] = useState<Doublet | null>(null);
-  const [activePanel, setActivePanel] = useState<"word" | "text">("word");
+  const [activeMiddle, setActiveMiddle] = useState<"doublets" | "text">("doublets");
 
   useEffect(() => {
     // Fetch a list of filenames from an index file, then fetch all doublets
@@ -49,24 +49,13 @@ const App: React.FC = () => {
           }}
         />
         <div style={{ flex: 1 }}>
-          {selectedDoublet && <DoubletDisplay doublet={selectedDoublet} />}
-        </div>
-        {/* Fragmented vertical line */}
-        <div
-          style={{
-            borderLeft: "2px dashed #888",
-            marginLeft: "2rem",
-            alignSelf: "stretch"
-          }}
-        />
-        <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginLeft: "2rem" }}>
           <div style={{ display: "flex", gap: "0.25rem", borderBottom: "1px solid #ddd", marginBottom: "0.75rem" }}>
-            {(["word", "text"] as const).map((panel) => {
-              const isActive = activePanel === panel;
+            {(["doublets", "text"] as const).map((panel) => {
+              const isActive = activeMiddle === panel;
               return (
                 <button
                   key={panel}
-                  onClick={() => setActivePanel(panel)}
+                  onClick={() => setActiveMiddle(panel)}
                   style={{
                     padding: "0.25rem 0.5rem",
                     fontSize: "0.85rem",
@@ -79,12 +68,25 @@ const App: React.FC = () => {
                     cursor: "pointer",
                   }}
                 >
-                  {panel === "word" ? "Word Lookup" : "Text Lookup"}
+                  {panel === "doublets" ? "Doublets" : "Text Lookup"}
                 </button>
               );
             })}
           </div>
-          {activePanel === "word" ? <HebrewLookup /> : <TextLookup />}
+          {activeMiddle === "doublets"
+            ? selectedDoublet && <DoubletDisplay doublet={selectedDoublet} />
+            : <TextLookup />}
+        </div>
+        {/* Fragmented vertical line */}
+        <div
+          style={{
+            borderLeft: "2px dashed #888",
+            marginLeft: "2rem",
+            alignSelf: "stretch"
+          }}
+        />
+        <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginLeft: "2rem" }}>
+          <HebrewLookup />
         </div>
       </div>
     </div>

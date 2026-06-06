@@ -33,7 +33,7 @@ export async function fetchVerseTexts(
 
   const encoded = encodeURIComponent(ref);
   const res = await fetch(
-    `${BASE_URL}/api/v3/texts/${encoded}?version=english&version=hebrew`
+    `${BASE_URL}/api/v3/texts/${encoded}?version=english&version=hebrew&return_format=text_only`
   );
   if (!res.ok) {
     throw new Error(`Sefaria API error: ${res.status} ${res.statusText}`);
@@ -57,7 +57,7 @@ export async function fetchVerseTexts(
 
 export async function getTexts(tref: string): Promise<SefariaV3TextResponse> {
   const encoded = encodeURIComponent(tref);
-  const res = await fetch(`${BASE_URL}/api/v3/texts/${encoded}`);
+  const res = await fetch(`${BASE_URL}/api/v3/texts/${encoded}?return_format=text_only`);
   if (!res.ok) {
     throw new Error(`Sefaria API error: ${res.status} ${res.statusText}`);
   }
