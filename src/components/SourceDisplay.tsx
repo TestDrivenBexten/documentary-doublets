@@ -35,7 +35,7 @@ export const SourceDisplay: React.FC<SourceDisplayProps> = ({ source }) => {
                             marginBottom: "0.5em"
                         }}
                     >
-                        <strong>{v.chapter}:{v.verse}</strong> {v.text}
+                        <strong>{v.chapter}:{v.verse}</strong> {v.englishText}
                     </li>
                 ))}
             </ul>

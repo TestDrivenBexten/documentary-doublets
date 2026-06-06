@@ -49,7 +49,7 @@ The security plan's `connect-src 'self'` must be updated to `connect-src 'self' 
 
 ## Steps
 
-### Phase 1 — Extend the `Verse` type
+### Phase 1 — Extend the `Verse` type ✅
 
 **Modify `src/types/Doublet.ts`**:
 - Add `heText?: string` to the `Verse` type (optional — not all verses will have it if API is offline)
