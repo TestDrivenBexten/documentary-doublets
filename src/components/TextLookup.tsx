@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { VerseTexts, fetchVerseTexts } from "../services/sefariaService";
+import { VerseTexts } from "../types/SefariaTypes";
+import { fetchVerseTexts } from "../services/sefariaService";
 
 export const TextLookup: React.FC = () => {
     const [query, setQuery] = useState("");

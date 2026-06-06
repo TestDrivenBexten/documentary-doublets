@@ -1,11 +1,9 @@
-import { SefariaV3TextResponse, LexiconEntry, LexiconSense } from "../types";
+import { SefariaV3TextResponse, LexiconEntry, LexiconSense, SefariaRawWordEntry, VerseTexts } from "../types/SefariaTypes";
+import { rawWordEntryToLexiconEntry } from "./sefariaMapper";
 
 const BASE_URL = "https://www.sefaria.org";
 
-export type VerseTexts = {
-  text: string;
-  heText: string;
-};
+export type { VerseTexts } from "../types/SefariaTypes";
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
@@ -64,13 +62,7 @@ export async function getTexts(tref: string): Promise<SefariaV3TextResponse> {
   return res.json() as Promise<SefariaV3TextResponse>;
 }
 
-interface SefariaRawWordEntry {
-  headword: string;
-  parent_lexicon: string;
-  transliteration?: string;
-  pronunciation?: string;
-  content?: { morphology?: string; senses?: LexiconSense[] };
-}
+export type { SefariaRawWordEntry } from "../types/SefariaTypes";
 
 export async function fetchHebrewWordDefinition(word: string): Promise<LexiconEntry[]> {
   if (!word) {
@@ -81,13 +73,6 @@ export async function fetchHebrewWordDefinition(word: string): Promise<LexiconEn
   if (!res.ok) {
     throw new Error(`Sefaria API error: ${res.status} ${res.statusText}`);
   }
-  const raw = await res.json() as SefariaRawWordEntry[];
-  return raw.map((entry) => ({
-    headword: entry.headword,
-    parent_lexicon: entry.parent_lexicon,
-    transliteration: entry.transliteration,
-    pronunciation: entry.pronunciation,
-    morphology: entry.content?.morphology,
-    senses: entry.content?.senses ?? [],
-  }));
+  const raw = (await res.json()) as SefariaRawWordEntry[];
+  return raw.map(rawWordEntryToLexiconEntry);
 }
