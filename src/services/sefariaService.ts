@@ -1,4 +1,4 @@
-import { SefariaV3TextResponse, LexiconEntry, LexiconSense, SefariaRawWordEntry, VerseTexts } from "../types/SefariaTypes";
+import { SefariaV3TextResponse, LexiconEntry, SefariaRawWordEntry, VerseTexts } from "../types/SefariaTypes";
 import { rawWordEntryToLexiconEntry } from "./sefariaMapper";
 
 const BASE_URL = "https://www.sefaria.org";
