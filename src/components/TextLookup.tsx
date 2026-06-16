@@ -44,15 +44,22 @@ export const TextLookup: React.FC = () => {
             {error && (
                 <div style={{ color: "red", fontSize: "0.9rem" }}>{error}</div>
             )}
-            {verseMap && (
+            {verseMap && (() => {
+                const hasHebrew = Array.from(verseMap.values()).some((v) => v.heText);
+                const activeHebrew = showHebrew && hasHebrew;
+                return (
                 <>
                     <div style={{ display: "flex", gap: "0.25rem", borderBottom: "1px solid #ddd", paddingBottom: "0.25rem" }}>
                         {(["EN", "HE"] as const).map((lang) => {
-                            const isActive = (lang === "HE") === showHebrew;
+                            const isHe = lang === "HE";
+                            const isActive = isHe === activeHebrew;
+                            const isDisabled = isHe && !hasHebrew;
                             return (
                                 <button
                                     key={lang}
-                                    onClick={() => setShowHebrew(lang === "HE")}
+                                    onClick={() => !isDisabled && setShowHebrew(isHe)}
+                                    disabled={isDisabled}
+                                    title={isDisabled ? "Hebrew text not available" : undefined}
                                     style={{
                                         padding: "0.25rem 0.5rem",
                                         fontSize: "0.8rem",
@@ -61,8 +68,8 @@ export const TextLookup: React.FC = () => {
                                         borderBottom: isActive ? "2px solid #333" : "2px solid transparent",
                                         marginBottom: "-1px",
                                         fontWeight: isActive ? "bold" : "normal",
-                                        color: isActive ? "#333" : "#555",
-                                        cursor: "pointer",
+                                        color: isDisabled ? "#bbb" : isActive ? "#333" : "#555",
+                                        cursor: isDisabled ? "not-allowed" : "pointer",
                                     }}
                                 >
                                     {lang}
@@ -72,12 +79,12 @@ export const TextLookup: React.FC = () => {
                     </div>
                     <ol style={{ margin: 0, padding: "0 0 0 1.5rem", fontSize: "0.95rem" }}>
                         {Array.from(verseMap.entries()).map(([verseNum, texts]) => {
-                            const display = showHebrew && texts.heText ? texts.heText : texts.text;
+                            const display = activeHebrew ? (texts.heText || texts.text) : texts.text;
                             return (
                                 <li
                                     key={verseNum}
-                                    dir={showHebrew ? "rtl" : "ltr"}
-                                    style={{ marginBottom: "0.4em", fontSize: showHebrew ? "1.1rem" : undefined }}
+                                    dir={activeHebrew ? "rtl" : "ltr"}
+                                    style={{ marginBottom: "0.4em", fontSize: activeHebrew ? "1.1rem" : undefined }}
                                 >
                                     <strong>{verseNum}</strong> {display}
                                 </li>
@@ -85,7 +92,8 @@ export const TextLookup: React.FC = () => {
                         })}
                     </ol>
                 </>
-            )}
+                );
+            })()}
         </div>
     );
 };
