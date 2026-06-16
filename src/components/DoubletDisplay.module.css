@@ -1,0 +1,23 @@
+.controls {
+    display: flex;
+    gap: 1em;
+}
+
+.layoutToggle {
+    cursor: pointer;
+    font-size: 1.5em;
+    display: inline-block;
+}
+
+.sourceList {
+    display: flex;
+    gap: 1em;
+}
+
+.sourceListHorizontal {
+    flex-direction: row;
+}
+
+.sourceListVertical {
+    flex-direction: column;
+}

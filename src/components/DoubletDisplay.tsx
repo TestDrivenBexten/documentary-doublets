@@ -4,6 +4,7 @@ import { SourceDisplay } from "./SourceDisplay";
 import SourceDisplayFilter from "./SourceDisplayFilter";
 import { SourceName } from "../types/SourceTypes";
 import { sortSourceNames, sortSourcesByName } from "../sortUtils";
+import styles from "./DoubletDisplay.module.css";
 
 type DoubletDisplayProps = {
     doublet: Doublet;
@@ -24,47 +25,57 @@ export const DoubletDisplay: React.FC<DoubletDisplayProps> = ({ doublet }) => {
             <h2>{doublet.title}</h2>
             {doublet.sources && (
                 <>
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "1em"
-                        }}
-                    >
-                        <SourceDisplayFilter
-                            options={sortedSourceNames}
-                            selected={filter}
-                            onChange={setFilter}
-                        />
-                        <span
-                            style={{
-                                cursor: "pointer",
-                                fontSize: "1.5em",
-                                display: "inline-block"
-                            }}
-                            title={`Stack ${horizontal ? "Vertically" : "Horizontally"}`}
-                            onClick={() => setHorizontal(h => !h)}
-                        >
-                            {horizontal ? "↔" : "↕"}
-                        </span>
-                    </div>
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: horizontal ? "row" : "column",
-                            gap: "1em"
-                        }}
-                    >
-                        {sortSourcesByName(doublet.sources)
-                            .filter(source => filter.includes(source.name))
-                            .map((source, idx) => (
-                                <SourceDisplay
-                                    key={idx}
-                                    source={source}
-                                />
-                            ))}
-                    </div>
+                    <DoubletControls
+                        sortedSourceNames={sortedSourceNames}
+                        filter={filter}
+                        horizontal={horizontal}
+                        onFilterChange={setFilter}
+                        onToggleLayout={() => setHorizontal(h => !h)}
+                    />
+                    <SourceList
+                        sources={sortSourcesByName(doublet.sources).filter(source => filter.includes(source.name))}
+                        horizontal={horizontal}
+                    />
                 </>
             )}
         </div>
     );
 };
+
+type DoubletControlsProps = {
+    sortedSourceNames: SourceName[];
+    filter: SourceName[];
+    horizontal: boolean;
+    onFilterChange: (value: SourceName[]) => void;
+    onToggleLayout: () => void;
+};
+
+const DoubletControls: React.FC<DoubletControlsProps> = ({ sortedSourceNames, filter, horizontal, onFilterChange, onToggleLayout }) => (
+    <div className={styles.controls}>
+        <SourceDisplayFilter
+            options={sortedSourceNames}
+            selected={filter}
+            onChange={onFilterChange}
+        />
+        <span
+            className={styles.layoutToggle}
+            title={`Stack ${horizontal ? "Vertically" : "Horizontally"}`}
+            onClick={onToggleLayout}
+        >
+            {horizontal ? "↔" : "↕"}
+        </span>
+    </div>
+);
+
+type SourceListProps = {
+    sources: Doublet["sources"] & {};
+    horizontal: boolean;
+};
+
+const SourceList: React.FC<SourceListProps> = ({ sources, horizontal }) => (
+    <div className={`${styles.sourceList} ${horizontal ? styles.sourceListHorizontal : styles.sourceListVertical}`}>
+        {sources.map((source, idx) => (
+            <SourceDisplay key={idx} source={source} />
+        ))}
+    </div>
+);
