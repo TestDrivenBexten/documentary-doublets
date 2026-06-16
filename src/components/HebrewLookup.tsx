@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LexiconEntry } from "../types";
+import { LexiconEntry } from "../types/SefariaTypes";
 import { fetchHebrewWordDefinition } from "../services/sefariaService";
 import { LexiconDisplay } from "./LexiconDisplay";
 

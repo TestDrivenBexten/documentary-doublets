@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LexiconEntry, LexiconSense, ParentLexicon } from "../types";
+import { LexiconEntry, LexiconSense, ParentLexicon } from "../types/SefariaTypes";
 
 function stripHtml(html: string): string {
   return html

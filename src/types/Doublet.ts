@@ -3,7 +3,8 @@ import type { SourceName } from './SourceTypes';
 export type Verse = {
     chapter: number;
     verse: number;
-    text: string;
+    englishText: string;
+    hebrewText?: string;
 };
 
 export type Source = {
