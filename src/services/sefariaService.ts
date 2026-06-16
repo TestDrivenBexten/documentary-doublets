@@ -40,8 +40,10 @@ export async function fetchVerseTexts(
 
   const enVersion = data.versions.find((v) => v.language === "en");
   const heVersion = data.versions.find((v) => v.language === "he");
-  const enTexts = Array.isArray(enVersion?.text) ? (enVersion.text as string[]) : [];
-  const heTexts = Array.isArray(heVersion?.text) ? (heVersion.text as string[]) : [];
+  const enText = enVersion?.text;
+  const heText = heVersion?.text;
+  const enTexts = Array.isArray(enText) ? enText : enText ? [enText] : [];
+  const heTexts = Array.isArray(heText) ? heText : heText ? [heText] : [];
 
   const map = new Map<number, VerseTexts>();
   enTexts.forEach((t, i) => {
