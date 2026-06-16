@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.form {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.input {
+    font-size: 1rem;
+    padding: 0.4rem 0.6rem;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+}
+
+.langBar {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.25rem;
+}
+
+.langButton {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    background: none;
+    border: none;
+    margin-bottom: -1px;
+}
+
+.verseList {
+    margin: 0;
+    padding: 0 0 0 1.5rem;
+    font-size: 0.95rem;
+}
+
+.verseItem {
+    margin-bottom: 0.4em;
+}
