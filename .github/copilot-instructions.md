@@ -1,0 +1,2 @@
+- Never use IIFEs (`(() => { ... })()`) inside JSX to introduce local variables or conditional rendering.
+  - Instead, extract a named sub-component
