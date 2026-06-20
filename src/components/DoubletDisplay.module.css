@@ -7,6 +7,10 @@
     cursor: pointer;
     font-size: 1.5em;
     display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
 }
 
 .sourceList {

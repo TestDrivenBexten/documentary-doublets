@@ -57,13 +57,14 @@ const DoubletControls: React.FC<DoubletControlsProps> = ({ sortedSourceNames, fi
             selected={filter}
             onChange={onFilterChange}
         />
-        <span
+        <button
             className={styles.layoutToggle}
+            aria-label={`Stack ${horizontal ? "Vertically" : "Horizontally"}`}
             title={`Stack ${horizontal ? "Vertically" : "Horizontally"}`}
             onClick={onToggleLayout}
         >
             {horizontal ? "↔" : "↕"}
-        </span>
+        </button>
     </div>
 );
 
