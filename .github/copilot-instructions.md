@@ -7,3 +7,4 @@
 
 - when writing test cases
   - Use 'Assert', 'Arrange', 'Act' comments to structure the test cases
+  - objects passed to mockResolvedValue should be assigned to a variable first
