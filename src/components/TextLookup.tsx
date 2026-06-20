@@ -44,8 +44,7 @@ const VerseResults: React.FC<VerseResultsProps> = ({ verseMap, showHebrew, onSho
                         <li
                             key={verseNum}
                             dir={activeHebrew ? "rtl" : "ltr"}
-                            className={styles.verseItem}
-                            style={{ fontSize: activeHebrew ? "1.1rem" : undefined }}
+                            className={[styles.verseItem, activeHebrew ? styles.verseItemHebrew : ""].join(" ").trim()}
                         >
                             <strong>{verseNum}</strong> {display}
                         </li>
