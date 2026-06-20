@@ -26,13 +26,11 @@ const VerseResults: React.FC<VerseResultsProps> = ({ verseMap, showHebrew, onSho
                             onClick={() => !isDisabled && onShowHebrewChange(isHe)}
                             disabled={isDisabled}
                             title={isDisabled ? "Hebrew text not available" : undefined}
-                            className={styles.langButton}
-                            style={{
-                                borderBottom: isActive ? "2px solid #333" : "2px solid transparent",
-                                fontWeight: isActive ? "bold" : "normal",
-                                color: isDisabled ? "#bbb" : isActive ? "#333" : "#555",
-                                cursor: isDisabled ? "not-allowed" : "pointer",
-                            }}
+                            className={[
+                                styles.langButton,
+                                isActive ? styles.langButtonActive : "",
+                                isDisabled ? styles.langButtonDisabled : "",
+                            ].join(" ").trim()}
                         >
                             {lang}
                         </button>
