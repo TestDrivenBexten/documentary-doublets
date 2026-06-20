@@ -7,6 +7,51 @@ import type { SefariaRawWordEntry } from "../types/SefariaTypes";
 // ---------------------------------------------------------------------------
 
 describe("fetchVerseTexts", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("builds the correct API ref for a whole-chapter reference (Genesis 16)", async () => {
+    // Arrange
+    const verseResponse = { ok: true, json: () => Promise.resolve({ versions: [] }) };
+    const mockFetch = vi.fn().mockResolvedValue(verseResponse);
+    vi.stubGlobal("fetch", mockFetch);
+
+    // Act
+    await fetchVerseTexts("Genesis 16");
+
+    // Assert
+    const calledUrl = mockFetch.mock.calls[0][0] as string;
+    expect(calledUrl).toContain(encodeURIComponent("Genesis 16"));
+  });
+
+  it("builds the correct API ref for a single-verse reference (Genesis 16.1)", async () => {
+    // Arrange
+    const verseResponse = { ok: true, json: () => Promise.resolve({ versions: [] }) };
+    const mockFetch = vi.fn().mockResolvedValue(verseResponse);
+    vi.stubGlobal("fetch", mockFetch);
+
+    // Act
+    await fetchVerseTexts("Genesis 16:1");
+
+    // Assert
+    const calledUrl = mockFetch.mock.calls[0][0] as string;
+    expect(calledUrl).toContain(encodeURIComponent("Genesis 16.1"));
+  });
+
+  it("builds the correct API ref for a multi-word book with a verse range (Song of Songs 1.1-7)", async () => {
+    // Arrange
+    const verseResponse = { ok: true, json: () => Promise.resolve({ versions: [] }) };
+    const mockFetch = vi.fn().mockResolvedValue(verseResponse);
+    vi.stubGlobal("fetch", mockFetch);
+
+    // Act
+    await fetchVerseTexts("Song of Songs 1:1-7");
+
+    // Assert
+    const calledUrl = mockFetch.mock.calls[0][0] as string;
+    expect(calledUrl).toContain(encodeURIComponent("Song of Songs 1.1-7"));
+  });
 });
 
 // ---------------------------------------------------------------------------
