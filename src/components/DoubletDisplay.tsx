@@ -75,8 +75,8 @@ type SourceListProps = {
 
 const SourceList: React.FC<SourceListProps> = ({ sources, horizontal }) => (
     <div className={`${styles.sourceList} ${horizontal ? styles.sourceListHorizontal : styles.sourceListVertical}`}>
-        {sources.map((source, idx) => (
-            <SourceDisplay key={idx} source={source} />
+        {sources.map((source) => (
+            <SourceDisplay key={`${source.name}-${source.verseNumbering}`} source={source} />
         ))}
     </div>
 );
