@@ -4,3 +4,6 @@
 
 - Avoid inline styling
   - Instead, use CSS modules or styled-components for styling
+
+- when writing test cases
+  - Use 'Assert', 'Arrange', 'Act' comments to structure the test cases
