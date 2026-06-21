@@ -32,5 +32,8 @@ Thumbs.db
 # Sefaria API
 .api/
 
+# Vite Test Coverage
+coverage/
+
 # Scratch pad
 notes.txt
