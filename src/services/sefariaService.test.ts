@@ -2,6 +2,10 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { fetchVerseTexts, fetchHebrewWordDefinition } from "./sefariaService";
 import type { SefariaRawWordEntry } from "../types/SefariaTypes";
 
+function getFirstCallUrl(mockFn: ReturnType<typeof vi.fn>): string {
+  return mockFn.mock.calls[0][0] as string;
+}
+
 // ---------------------------------------------------------------------------
 // fetchVerseTexts
 // ---------------------------------------------------------------------------
@@ -21,7 +25,7 @@ describe("fetchVerseTexts", () => {
     await fetchVerseTexts("Genesis 16");
 
     // Assert
-    const calledUrl = mockFetch.mock.calls[0][0] as string;
+    const calledUrl = getFirstCallUrl(mockFetch);
     expect(calledUrl).toContain(encodeURIComponent("Genesis 16"));
   });
 
@@ -35,7 +39,7 @@ describe("fetchVerseTexts", () => {
     await fetchVerseTexts("Genesis 16:1");
 
     // Assert
-    const calledUrl = mockFetch.mock.calls[0][0] as string;
+    const calledUrl = getFirstCallUrl(mockFetch);
     expect(calledUrl).toContain(encodeURIComponent("Genesis 16.1"));
   });
 
@@ -49,7 +53,7 @@ describe("fetchVerseTexts", () => {
     await fetchVerseTexts("Song of Songs 1:1-7");
 
     // Assert
-    const calledUrl = mockFetch.mock.calls[0][0] as string;
+    const calledUrl = getFirstCallUrl(mockFetch);
     expect(calledUrl).toContain(encodeURIComponent("Song of Songs 1.1-7"));
   });
 });
@@ -127,7 +131,7 @@ describe("fetchHebrewWordDefinition", () => {
     await fetchHebrewWordDefinition("שָׁלוֹם");
 
     // Assert
-    const calledUrl = mockFetch.mock.calls[0][0] as string;
+    const calledUrl = getFirstCallUrl(mockFetch);
     expect(calledUrl).toContain(encodeURIComponent("שָׁלוֹם"));
   });
 });
