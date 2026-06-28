@@ -39,9 +39,9 @@ The security plan's `connect-src 'self'` must be updated to `connect-src 'self' 
 
 | verseNumbering | Parsed | API ref |
 |---|---|---|
-| `"Genesis 16:1-2,4-14"` | book=Genesis, ch=16, min=1, max=14 | `Genesis.16.1-14` |
-| `"Genesis 16:3,15-16"` | book=Genesis, ch=16, min=3, max=16 | `Genesis.16.3-16` |
-| `"Genesis 21:8-19"` | book=Genesis, ch=21, min=8, max=19 | `Genesis.21.8-19` |
+| `"Genesis 16:1-2,4-14"` | book=Genesis, ch=16, min=1, max=14 | `Genesis 16.1-14` |
+| `"Genesis 16:3,15-16"` | book=Genesis, ch=16, min=3, max=16 | `Genesis 16.3-16` |
+| `"Genesis 21:8-19"` | book=Genesis, ch=21, min=8, max=19 | `Genesis 21.8-19` |
 
 > **Scope**: single-chapter refs only. Multi-chapter refs (where the chapter changes mid-range) are a known non-goal for this iteration.
 

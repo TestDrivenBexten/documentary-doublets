@@ -10,8 +10,11 @@ function stripHtml(html: string): string {
 }
 
 function buildApiRef(verseNumbering: string): string {
+  if (!verseNumbering.includes(":")) {
+    return verseNumbering.trim();
+  }
   const [left, right] = verseNumbering.split(":");
-  const bookChapter = left.trim().replace(" ", ".");
+  const bookChapter = left.trim();
   const nums = right.split(",").flatMap((seg) =>
     seg.split("-").map((n) => parseInt(n.trim(), 10))
   );
@@ -27,7 +30,7 @@ export async function fetchVerseTexts(
   const ref = buildApiRef(verseNumbering);
   // Derive start verse from the built ref (e.g. "Genesis.16.1-14" → 1)
   const versePart = ref.split(".").at(-1) ?? "1";
-  const startVerse = parseInt(versePart.split("-")[0], 10);
+  const startVerse = parseInt(versePart.split("-")[0], 10) || 1;
 
   const encoded = encodeURIComponent(ref);
   const res = await fetch(
