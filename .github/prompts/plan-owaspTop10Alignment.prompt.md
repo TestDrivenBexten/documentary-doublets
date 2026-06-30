@@ -26,11 +26,11 @@ Public read-only SPA on GitHub Pages consuming the Sefaria API. No auth, no secr
 
 ## Phase 2 — Shared Sanitizer Utility (A03)
 
-**Step 3: Install `dompurify` + `@types/dompurify`** *(parallel with step 6)*
+**~~Step 3: Install `dompurify` + `@types/dompurify`~~** ✅ *(parallel with step 6)*
 
-**Step 4: Create `src/utils/stripHtml.ts`** — single exported `stripHtml(html)` using `DOMPurify.sanitize(html, { ALLOWED_TAGS: [] })`, replacing the fragile regex
+**~~Step 4: Create `src/utils/stripHtml.ts`~~** ✅ — single exported `stripHtml(html)` using `DOMPurify.sanitize(html, { ALLOWED_TAGS: [] })`, replacing the fragile regex
 
-**Step 5: Remove local `stripHtml` copies** from `src/services/sefariaService.ts` and `src/components/LexiconDisplay.tsx`; import shared utility *(depends on step 4)*
+**~~Step 5: Remove local `stripHtml` copies~~** ✅ from `src/services/sefariaService.ts` and `src/components/LexiconDisplay.tsx`; import shared utility *(depends on step 4)*
 
 ---
 

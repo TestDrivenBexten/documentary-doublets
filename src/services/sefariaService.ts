@@ -1,13 +1,10 @@
 import { SefariaV3TextResponse, LexiconEntry, SefariaRawWordEntry, VerseTexts } from "../types/SefariaTypes";
 import { rawWordEntryToLexiconEntry } from "./sefariaMapper";
+import { stripHtml } from "../utils/stripHtml";
 
 const BASE_URL = "https://www.sefaria.org";
 
 export type { VerseTexts } from "../types/SefariaTypes";
-
-function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-}
 
 function buildApiRef(verseNumbering: string): string {
   if (!verseNumbering.includes(":")) {

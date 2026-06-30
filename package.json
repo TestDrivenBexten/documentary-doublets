@@ -16,6 +16,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@types/dompurify": "^3.2.0",
+    "dompurify": "^3.4.11",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },

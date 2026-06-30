@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { LexiconEntry, LexiconSense, ParentLexicon } from "../types/SefariaTypes";
-
-function stripHtml(html: string): string {
-  return html
-    .replace(/<[^>]*>/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
+import { stripHtml } from "../utils/stripHtml";
 
 function collectDefinitions(
   senses: LexiconSense[],
