@@ -6,7 +6,7 @@ Public read-only SPA on GitHub Pages consuming the Sefaria API. No auth, no secr
 
 ## Phase 1 — Content Security Policy (A05)
 
-**Step 1: Add CSP `<meta>` tag to index.html** — strict production policy:
+**~~Step 1: Add CSP `<meta>` tag to index.html~~** ✅ — strict production policy:
 - `default-src 'self'`
 - `script-src 'self'` *(no `unsafe-inline`)*
 - `connect-src 'self' https://www.sefaria.org`
