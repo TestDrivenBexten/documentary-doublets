@@ -36,9 +36,9 @@ Public read-only SPA on GitHub Pages consuming the Sefaria API. No auth, no secr
 
 ## Phase 3 — Runtime API Schema Validation (A08)
 
-**Step 6: Add `zod`** to `package.json` *(parallel with step 3)*
+**~~Step 6: Add `zod`~~** ✅ to `package.json` *(parallel with step 3)*
 
-**Step 7: Define Zod schemas in `src/services/sefariaService.ts`** mirroring `SefariaV3TextResponse` and `SefariaRawWordEntry[]`; replace `as` casts with `schema.parse(data)` — strict: ZodError propagates to callers, who display a UI error *(depends on step 6)*
+**~~Step 7: Define Zod schemas in `src/services/sefariaService.ts`~~** ✅ mirroring `SefariaV3TextResponse` and `SefariaRawWordEntry[]`; replace `as` casts with `schema.parse(data)` — strict: ZodError propagates to callers, who display a UI error *(depends on step 6)*
 
 ---
 
