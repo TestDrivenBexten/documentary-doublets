@@ -15,7 +15,7 @@ Public read-only SPA on GitHub Pages consuming the Sefaria API. No auth, no secr
 - `img-src 'self' data:`
 - `frame-ancestors 'none'` *(clickjacking — note: ignored in `<meta>` by spec; this is a known deployment gap on GitHub Pages)*
 
-**Step 2: Add `server.headers` to vite.config.ts** — dev-only relaxation:
+**~~Step 2: Add `server.headers` to vite.config.ts~~** ✅ — dev-only relaxation:
 - `X-Content-Type-Options: nosniff`
 - `X-Frame-Options: DENY`
 - `Referrer-Policy: strict-origin-when-cross-origin`
