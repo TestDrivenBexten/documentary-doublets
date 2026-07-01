@@ -6,24 +6,37 @@ import { Header } from "./components/Header";
 import { HebrewLookup } from "./components/HebrewLookup";
 import { TextLookup } from "./components/TextLookup";
 
+const SAFE_FILENAME_RE = /^[\w-]+\.json$/;
+
 const App: React.FC = () => {
   // useState for a list of doublets
   const [doublets, setDoublets] = useState<Doublet[]>([]);
   // useState for the selected doublet
   const [selectedDoublet, setSelectedDoublet] = useState<Doublet | null>(null);
   const [activeMiddle, setActiveMiddle] = useState<"doublets" | "text">("doublets");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch a list of filenames from an index file, then fetch all doublets
     fetch(`${import.meta.env.BASE_URL}doublets/index.json`)
       .then((res) => res.json())
       .then((filenames: string[]) => {
+        const safeFilenames = filenames.filter(
+          (f) => typeof f === "string" && SAFE_FILENAME_RE.test(f)
+        );
         Promise.all(
-          filenames.map(filename =>
+          safeFilenames.map(filename =>
             fetch(`${import.meta.env.BASE_URL}doublets/${filename}`).then(res => res.json())
           )
-        ).then(setDoublets);
-      });
+        )
+          .then(setDoublets)
+          .catch((err: unknown) =>
+            setError(err instanceof Error ? err.message : "Failed to load doublets")
+          );
+      })
+      .catch((err: unknown) =>
+        setError(err instanceof Error ? err.message : "Failed to load doublet index")
+      );
   }, []);
 
   return (
@@ -31,14 +44,17 @@ const App: React.FC = () => {
       <Header />
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
         <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginRight: "2rem" }}>
-          {doublets.length > 0 ? (
+          {error && (
+            <div style={{ color: "red", fontSize: "0.9rem" }}>{error}</div>
+          )}
+          {!error && (doublets.length > 0 ? (
             <DoubletList
               doublets={doublets}
               setSelectedDoublet={setSelectedDoublet}
             />
           ) : (
             <div>Loading...</div>
-          )}
+          ))}
         </div>
         {/* Fragmented vertical line */}
         <div
