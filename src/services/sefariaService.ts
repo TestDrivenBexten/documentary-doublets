@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SefariaV3TextResponse, LexiconEntry, SefariaRawWordEntry, LexiconSense, VerseTexts } from "../types/SefariaTypes";
+import { SefariaV3TextResponse, LexiconEntry, LexiconSense, VerseTexts } from "../types/SefariaTypes";
 import { rawWordEntryToLexiconEntry } from "./sefariaMapper";
 import { stripHtml } from "../utils/stripHtml";
 
@@ -103,8 +103,6 @@ export async function getTexts(tref: string): Promise<SefariaV3TextResponse> {
   }
   return SefariaV3TextResponseSchema.parse(await res.json());
 }
-
-export type { SefariaRawWordEntry } from "../types/SefariaTypes";
 
 export async function fetchHebrewWordDefinition(word: string): Promise<LexiconEntry[]> {
   if (!word) {
