@@ -44,9 +44,9 @@ Public read-only SPA on GitHub Pages consuming the Sefaria API. No auth, no secr
 
 ## Phase 4 — Filename Validation & Error Handling (A08 + A09)
 
-**Step 8: Validate `filenames` in `src/App.tsx`** — after fetching `index.json`, filter each entry against `/^[\w-]+\.json$/`; reject any containing `://` or starting with `..` before passing to `fetch()`
+**~~Step 8: Validate `filenames` in `src/App.tsx`~~** ✅ — after fetching `index.json`, filter each entry against `/^[\w-]+\.json$/`; reject any containing `://` or starting with `..` before passing to `fetch()`
 
-**Step 9: Add `.catch()` to both Promise chains in `src/App.tsx`** — the outer `index.json` fetch and the inner `Promise.all(...)` both currently swallow errors silently; set an error state and show a user-visible message (matching the `HebrewLookup`/`TextLookup` error-display pattern)
+**~~Step 9: Add `.catch()` to both Promise chains in `src/App.tsx`~~** ✅ — the outer `index.json` fetch and the inner `Promise.all(...)` both currently swallow errors silently; set an error state and show a user-visible message (matching the `HebrewLookup`/`TextLookup` error-display pattern)
 
 ---
 
