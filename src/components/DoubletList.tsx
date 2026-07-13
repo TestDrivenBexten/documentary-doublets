@@ -3,6 +3,7 @@ import { Doublet } from "../types/Doublet";
 import { DoubletCard } from "./DoubletCard";
 import SourceDisplayFilter from "./SourceDisplayFilter";
 import { SourceName } from "../types/SourceTypes";
+import styles from "./DoubletList.module.css";
 
 type DoubletListProps = {
     doublets: Doublet[];
@@ -23,7 +24,7 @@ export const DoubletList: React.FC<DoubletListProps> = ({ doublets, setSelectedD
         .filter((v, i, a) => a.indexOf(v) === i); // Unique source names
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <div className={styles.list}>
             <div>Source filter</div>
             <SourceDisplayFilter
                 options={sourceOptions}

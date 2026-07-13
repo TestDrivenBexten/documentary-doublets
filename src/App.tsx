@@ -5,6 +5,7 @@ import { DoubletDisplay } from "./components/DoubletDisplay";
 import { Header } from "./components/Header";
 import { HebrewLookup } from "./components/HebrewLookup";
 import { TextLookup } from "./components/TextLookup";
+import styles from "./App.module.css";
 
 const SAFE_FILENAME_RE = /^[\w-]+\.json$/;
 
@@ -42,10 +43,10 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
-      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
-        <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginRight: "2rem" }}>
+      <div className={styles.layout}>
+        <div className={`${styles.sidePanel} ${styles.leftPanel}`}>
           {error && (
-            <div style={{ color: "red", fontSize: "0.9rem" }}>{error}</div>
+            <div className={styles.error}>{error}</div>
           )}
           {!error && (doublets.length > 0 ? (
             <DoubletList
@@ -57,32 +58,16 @@ const App: React.FC = () => {
           ))}
         </div>
         {/* Fragmented vertical line */}
-        <div
-          style={{
-            borderLeft: "2px dashed #888",
-            marginRight: "2rem",
-            alignSelf: "stretch"
-          }}
-        />
-        <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", gap: "0.25rem", borderBottom: "1px solid #ddd", marginBottom: "0.75rem" }}>
+        <div className={`${styles.divider} ${styles.leftDivider}`} />
+        <div className={styles.middlePanel}>
+          <div className={styles.tabBar}>
             {(["doublets", "text"] as const).map((panel) => {
               const isActive = activeMiddle === panel;
               return (
                 <button
                   key={panel}
                   onClick={() => setActiveMiddle(panel)}
-                  style={{
-                    padding: "0.25rem 0.5rem",
-                    fontSize: "0.85rem",
-                    background: "none",
-                    border: "none",
-                    borderBottom: isActive ? "2px solid #333" : "2px solid transparent",
-                    marginBottom: "-1px",
-                    fontWeight: isActive ? "bold" : "normal",
-                    color: isActive ? "#333" : "#555",
-                    cursor: "pointer",
-                  }}
+                  className={`${styles.tabButton}${isActive ? ` ${styles.tabButtonActive}` : ""}`}
                 >
                   {panel === "doublets" ? "Doublets" : "Text Lookup"}
                 </button>
@@ -94,14 +79,8 @@ const App: React.FC = () => {
             : <TextLookup />}
         </div>
         {/* Fragmented vertical line */}
-        <div
-          style={{
-            borderLeft: "2px dashed #888",
-            marginLeft: "2rem",
-            alignSelf: "stretch"
-          }}
-        />
-        <div style={{ width: "20vw", minWidth: 220, maxWidth: 400, marginLeft: "2rem" }}>
+        <div className={`${styles.divider} ${styles.rightDivider}`} />
+        <div className={`${styles.sidePanel} ${styles.rightPanel}`}>
           <HebrewLookup />
         </div>
       </div>

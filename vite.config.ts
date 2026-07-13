@@ -3,7 +3,24 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   base: '/documentary-doublets/',
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'strip-csp-meta-dev',
+      transformIndexHtml: {
+        order: 'pre',
+        handler(html, { server }) {
+          if (server) {
+            // In dev mode, the HTTP response header CSP (with 'unsafe-inline') is used instead.
+            // Keeping the meta tag would make both policies apply simultaneously, with the
+            // more restrictive meta tag blocking Vite's dynamic style injection.
+            return html.replace(/<meta[^>]*http-equiv="Content-Security-Policy"[^>]*\/?>/i, '');
+          }
+          return html;
+        },
+      },
+    },
+  ],
   server: {
     headers: {
       'X-Content-Type-Options': 'nosniff',
