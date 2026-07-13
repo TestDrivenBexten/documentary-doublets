@@ -17,7 +17,7 @@ describe("fetchVerseTexts", () => {
 
   it("builds the correct API ref for a whole-chapter reference (Genesis 16)", async () => {
     // Arrange
-    const verseResponse = { ok: true, json: () => Promise.resolve({ versions: [] }) };
+    const verseResponse = { ok: true, json: () => Promise.resolve({ title: "Genesis", versions: [] }) };
     const mockFetch = vi.fn().mockResolvedValue(verseResponse);
     vi.stubGlobal("fetch", mockFetch);
 
@@ -31,7 +31,7 @@ describe("fetchVerseTexts", () => {
 
   it("builds the correct API ref for a single-verse reference (Genesis 16.1)", async () => {
     // Arrange
-    const verseResponse = { ok: true, json: () => Promise.resolve({ versions: [] }) };
+    const verseResponse = { ok: true, json: () => Promise.resolve({ title: "Genesis", versions: [] }) };
     const mockFetch = vi.fn().mockResolvedValue(verseResponse);
     vi.stubGlobal("fetch", mockFetch);
 
@@ -45,7 +45,7 @@ describe("fetchVerseTexts", () => {
 
   it("builds the correct API ref for a multi-word book with a verse range (Song of Songs 1.1-7)", async () => {
     // Arrange
-    const verseResponse = { ok: true, json: () => Promise.resolve({ versions: [] }) };
+    const verseResponse = { ok: true, json: () => Promise.resolve({ title: "Song of Songs", versions: [] }) };
     const mockFetch = vi.fn().mockResolvedValue(verseResponse);
     vi.stubGlobal("fetch", mockFetch);
 

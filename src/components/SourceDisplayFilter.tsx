@@ -2,6 +2,7 @@ import React from "react";
 import { SourceName } from "../types/SourceTypes";
 import SourceTag from "./SourceTag";
 import { sortSourceNames } from "../sortUtils";
+import styles from "./SourceDisplayFilter.module.css";
 
 type SourceFilterProps = {
     options?: SourceName[];
@@ -21,7 +22,7 @@ const SourceDisplayFilter: React.FC<SourceFilterProps> = ({ options = defaultOpt
     };
 
     return (
-        <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
+        <div className={styles.filter}>
             {sortedOptions.map(opt => (
                 <SourceTag
                     key={opt}

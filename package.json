@@ -16,8 +16,10 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "dompurify": "^3.4.11",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "zod": "^4.4.3"
   },
   "homepage": "https://TestDrivenBexten.github.io/documentary-doublets/",
   "devDependencies": {

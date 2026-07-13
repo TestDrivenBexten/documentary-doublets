@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { LexiconEntry } from "../types/SefariaTypes";
 import { fetchHebrewWordDefinition } from "../services/sefariaService";
 import { LexiconDisplay } from "./LexiconDisplay";
+import styles from "./HebrewLookup.module.css";
 
 export const HebrewLookup: React.FC = () => {
     const [query, setQuery] = useState("");
@@ -23,11 +24,11 @@ export const HebrewLookup: React.FC = () => {
     };
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label htmlFor="hebrew-lookup-input" style={{ fontWeight: "bold" }}>
+        <div className={styles.container}>
+            <label htmlFor="hebrew-lookup-input" className={styles.label}>
                 Hebrew Lookup
             </label>
-            <form onSubmit={handleSearch} style={{ display: "flex", gap: "0.4rem" }}>
+            <form onSubmit={handleSearch} className={styles.form}>
                 <input
                     id="hebrew-lookup-input"
                     type="text"
@@ -35,14 +36,14 @@ export const HebrewLookup: React.FC = () => {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Enter Hebrew word…"
                     dir="rtl"
-                    style={{ fontSize: "1.1rem", padding: "0.4rem 0.6rem", flex: 1, boxSizing: "border-box" }}
+                    className={styles.input}
                 />
                 <button type="submit" disabled={isLoading || !query.trim()}>
                     {isLoading ? "…" : "Look up"}
                 </button>
             </form>
             {error && (
-                <div style={{ color: "red", fontSize: "0.9rem" }}>{error}</div>
+                <div className={styles.error}>{error}</div>
             )}
             {results && <LexiconDisplay entries={results} />}
         </div>

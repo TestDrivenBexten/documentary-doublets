@@ -1,0 +1,28 @@
+.verseList {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 0;
+  list-style: none;
+}
+
+.verseItem {
+  margin-bottom: 0.5em;
+}
+
+/* Per-source background colors — keep in sync with src/colors.ts */
+.sourceP {
+  background: #e6f2ff;
+}
+
+.sourceJ {
+  background: #e6ffe6;
+}
+
+.sourceE {
+  background: #b3ffcc;
+}
+
+.sourceD {
+  background: #d0e8ff;
+}

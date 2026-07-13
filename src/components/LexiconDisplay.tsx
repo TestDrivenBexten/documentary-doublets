@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { LexiconEntry, LexiconSense, ParentLexicon } from "../types/SefariaTypes";
-
-function stripHtml(html: string): string {
-  return html
-    .replace(/<[^>]*>/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
+import { stripHtml } from "../utils/stripHtml";
+import styles from "./LexiconDisplay.module.css";
 
 function collectDefinitions(
   senses: LexiconSense[],
@@ -37,37 +32,28 @@ type LexiconEntryDisplayProps = {
 };
 
 const LexiconEntryDisplay: React.FC<LexiconEntryDisplayProps> = ({ entry }) => (
-  <div style={{ borderTop: "1px solid #ccc", paddingTop: "0.5rem" }}>
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "baseline",
-        gap: "0.5rem",
-      }}
-    >
-      <span dir="rtl" style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+  <div className={styles.entry}>
+    <div className={styles.entryHeader}>
+      <span dir="rtl" className={styles.headword}>
         {entry.headword}
       </span>
-      <span style={{ fontSize: "0.75rem", color: "#666", flexShrink: 0 }}>
+      <span className={styles.lexiconName}>
         {entry.parent_lexicon}
       </span>
     </div>
     {(entry.transliteration || entry.pronunciation) && (
-      <div style={{ fontSize: "0.85rem", color: "#555" }}>
+      <div className={styles.pronunciation}>
         {[entry.transliteration, entry.pronunciation]
           .filter(Boolean)
           .join(" · ")}
       </div>
     )}
     {entry.morphology && (
-      <div style={{ fontSize: "0.8rem", fontStyle: "italic", color: "#555" }}>
+      <div className={styles.morphology}>
         {entry.morphology}
       </div>
     )}
-    <ul
-      style={{ margin: "0.25rem 0 0 1.2rem", padding: 0, fontSize: "0.9rem" }}
-    >
+    <ul className={styles.definitionList}>
       {collectDefinitions(entry.senses).map((def, j) => (
         <li key={j}>{def}</li>
       ))}
@@ -85,7 +71,7 @@ export const LexiconDisplay: React.FC<LexiconDisplayProps> = ({ entries }) => {
   );
   if (entries.length === 0) {
     return (
-      <div style={{ fontSize: "0.85rem", color: "#888", paddingTop: "0.5rem" }}>
+      <div className={styles.empty}>
         No definitions found.
       </div>
     );
@@ -95,15 +81,7 @@ export const LexiconDisplay: React.FC<LexiconDisplayProps> = ({ entries }) => {
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          gap: "0.25rem",
-          flexWrap: "wrap",
-          borderBottom: "1px solid #ddd",
-          marginBottom: "0.25rem",
-        }}
-      >
+      <div className={styles.tabBar}>
         {LEXICON_TABS.map(({ lexicon, label }) => {
           const available = entries.some((e) => e.parent_lexicon === lexicon);
           const isActive = selected === lexicon;
@@ -112,19 +90,11 @@ export const LexiconDisplay: React.FC<LexiconDisplayProps> = ({ entries }) => {
               key={lexicon}
               onClick={() => setSelected(lexicon)}
               disabled={!available}
-              style={{
-                padding: "0.25rem 0.5rem",
-                fontSize: "0.8rem",
-                background: "none",
-                border: "none",
-                borderBottom: isActive
-                  ? "2px solid #333"
-                  : "2px solid transparent",
-                marginBottom: "-1px",
-                fontWeight: isActive ? "bold" : "normal",
-                color: available ? (isActive ? "#333" : "#555") : "#bbb",
-                cursor: available ? "pointer" : "default",
-              }}
+              className={[
+                styles.tab,
+                isActive ? styles.tabActive : "",
+                !available ? styles.tabDisabled : "",
+              ].filter(Boolean).join(" ")}
             >
               {label}
             </button>
@@ -134,9 +104,7 @@ export const LexiconDisplay: React.FC<LexiconDisplayProps> = ({ entries }) => {
       {activeEntry ? (
         <LexiconEntryDisplay entry={activeEntry} />
       ) : (
-        <div
-          style={{ fontSize: "0.85rem", color: "#888", paddingTop: "0.5rem" }}
-        >
+        <div className={styles.empty}>
           Not available in this lexicon.
         </div>
       )}
