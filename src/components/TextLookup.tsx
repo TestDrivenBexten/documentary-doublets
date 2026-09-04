@@ -129,7 +129,7 @@ const VerseResults: React.FC<VerseResultsProps> = ({ verseMap, showHebrew, onSho
                             dir={activeHebrew ? "rtl" : "ltr"}
                             className={[styles.verseItem, activeHebrew ? styles.verseItemHebrew : ""].join(" ").trim()}
                         >
-                            <strong>{verseNum}</strong> {display}
+                            {display}
                         </li>
                     );
                 })}
