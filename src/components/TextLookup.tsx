@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { VerseTexts } from "../types/SefariaTypes";
 import { fetchVerseTexts } from "../services/sefariaService";
+import { PrintPreview } from "./PrintPreview";
 import styles from "./TextLookup.module.css";
 
 export const TextLookup: React.FC = () => {
@@ -9,6 +10,21 @@ export const TextLookup: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [verseMap, setVerseMap] = useState<Map<number, VerseTexts> | null>(null);
     const [showHebrew, setShowHebrew] = useState(false);
+    const [showPrintPreview, setShowPrintPreview] = useState(false);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (!(event.ctrlKey || event.metaKey) || event.key.toLowerCase() !== "p") return;
+            const target = event.target as HTMLElement | null;
+            if (target?.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target?.tagName ?? "")) return;
+            if (verseMap && Array.from(verseMap.values()).some((texts) => texts.heText)) {
+                event.preventDefault();
+                setShowPrintPreview(true);
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [verseMap]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,6 +33,7 @@ export const TextLookup: React.FC = () => {
         setIsLoading(true);
         setError(null);
         setVerseMap(null);
+        setShowPrintPreview(false);
         fetchVerseTexts(ref)
             .then(setVerseMap)
             .catch((err: unknown) => setError(err instanceof Error ? err.message : "Lookup failed"))
@@ -50,6 +67,13 @@ export const TextLookup: React.FC = () => {
                     verseMap={verseMap}
                     showHebrew={showHebrew}
                     onShowHebrewChange={setShowHebrew}
+                    onOpenPrintPreview={() => setShowPrintPreview(true)}
+                />
+            )}
+            {showPrintPreview && verseMap && (
+                <PrintPreview
+                    verseMap={verseMap}
+                    onClose={() => setShowPrintPreview(false)}
                 />
             )}
         </div>
@@ -60,9 +84,10 @@ interface VerseResultsProps {
     verseMap: Map<number, VerseTexts>;
     showHebrew: boolean;
     onShowHebrewChange: (value: boolean) => void;
+    onOpenPrintPreview: () => void;
 }
 
-const VerseResults: React.FC<VerseResultsProps> = ({ verseMap, showHebrew, onShowHebrewChange }) => {
+const VerseResults: React.FC<VerseResultsProps> = ({ verseMap, showHebrew, onShowHebrewChange, onOpenPrintPreview }) => {
     const hasHebrew = Array.from(verseMap.values()).some((v) => v.heText);
     const activeHebrew = showHebrew && hasHebrew;
 
@@ -89,6 +114,11 @@ const VerseResults: React.FC<VerseResultsProps> = ({ verseMap, showHebrew, onSho
                         </button>
                     );
                 })}
+                {hasHebrew && (
+                    <button type="button" onClick={onOpenPrintPreview} className={styles.previewButton}>
+                        Print preview
+                    </button>
+                )}
             </div>
             <ol className={styles.verseList}>
                 {Array.from(verseMap.entries()).map(([verseNum, texts]) => {
