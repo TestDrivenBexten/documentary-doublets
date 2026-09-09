@@ -5,10 +5,11 @@ import styles from "./PrintPreview.module.css";
 
 interface PrintPreviewProps {
     verseMap: Map<number, VerseTexts>;
+    verseReference: string;
     onClose: () => void;
 }
 
-export const PrintPreview: React.FC<PrintPreviewProps> = ({ verseMap, onClose }) => {
+export const PrintPreview: React.FC<PrintPreviewProps> = ({ verseMap, verseReference, onClose }) => {
     const closeButtonRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
@@ -39,7 +40,7 @@ export const PrintPreview: React.FC<PrintPreviewProps> = ({ verseMap, onClose })
                 onClick={(event) => event.stopPropagation()}
             >
                 <div className={styles.toolbar}>
-                    <h2 id="print-preview-title">Hebrew Print Preview</h2>
+                    <h2 id="print-preview-title">{verseReference}</h2>
                     <div className={styles.actions}>
                         <button type="button" onClick={() => window.print()}>
                             Print

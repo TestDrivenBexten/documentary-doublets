@@ -12,19 +12,18 @@ describe("PrintPreview", () => {
         vi.restoreAllMocks();
     });
 
-    it("renders Hebrew verses with verse numbers by default", () => {
+    it("renders the searched reference and Hebrew verses", () => {
         // Arrange
         const onClose = vi.fn();
 
         // Act
-        render(<PrintPreview verseMap={verseMap} onClose={onClose} />);
+        render(<PrintPreview verseMap={verseMap} verseReference="Micah 1:1-2" onClose={onClose} />);
 
         // Assert
         expect(screen.getByRole("dialog")).toHaveAttribute("aria-modal", "true");
+        expect(screen.getByRole("heading", { name: "Micah 1:1-2" })).toBeInTheDocument();
         expect(screen.getByText("בְּרֵאשִׁית")).toBeInTheDocument();
         expect(screen.getByText("וְהָאָרֶץ")).toBeInTheDocument();
-        expect(screen.getByText("1")).toBeInTheDocument();
-        expect(screen.getByText("2")).toBeInTheDocument();
     });
 
     it("prints and closes through the supported controls", () => {
@@ -32,7 +31,7 @@ describe("PrintPreview", () => {
         const onClose = vi.fn();
         const print = vi.fn();
         vi.stubGlobal("print", print);
-        render(<PrintPreview verseMap={verseMap} onClose={onClose} />);
+        render(<PrintPreview verseMap={verseMap} verseReference="Micah 1:1-2" onClose={onClose} />);
 
         // Act
         fireEvent.click(screen.getByRole("button", { name: "Print" }));
@@ -46,7 +45,7 @@ describe("PrintPreview", () => {
     it("closes when the overlay is clicked", () => {
         // Arrange
         const onClose = vi.fn();
-        render(<PrintPreview verseMap={verseMap} onClose={onClose} />);
+        render(<PrintPreview verseMap={verseMap} verseReference="Micah 1:1-2" onClose={onClose} />);
 
         // Act
         fireEvent.click(screen.getByRole("presentation"));

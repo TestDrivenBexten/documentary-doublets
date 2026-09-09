@@ -73,6 +73,7 @@ export const TextLookup: React.FC = () => {
             {showPrintPreview && verseMap && (
                 <PrintPreview
                     verseMap={verseMap}
+                    verseReference={query.trim()}
                     onClose={() => setShowPrintPreview(false)}
                 />
             )}
