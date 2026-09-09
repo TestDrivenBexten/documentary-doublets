@@ -24,6 +24,8 @@ describe("PrintPreview", () => {
         expect(screen.getByRole("heading", { name: "Micah 1:1-2" })).toBeInTheDocument();
         expect(screen.getByText("בְּרֵאשִׁית")).toBeInTheDocument();
         expect(screen.getByText("וְהָאָרֶץ")).toBeInTheDocument();
+        expect(screen.getByText(".1")).toBeInTheDocument();
+        expect(screen.getByText(".2")).toBeInTheDocument();
     });
 
     it("prints and closes through the supported controls", () => {

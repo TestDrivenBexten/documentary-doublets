@@ -52,6 +52,7 @@
 .verseList {
     margin: 0;
     padding: 1.5rem 0 1.5rem 2.5rem;
+    list-style: none;
     font-size: 1.35rem;
     line-height: 2;
 }
@@ -62,7 +63,8 @@
 }
 
 .verseNumber {
-    margin-inline-start: 0.75rem;
+    display: inline-block;
+    margin-inline-start: 1rem;
     color: #555;
     font-family: Arial, sans-serif;
     font-size: 0.8em;
@@ -105,12 +107,23 @@
     }
 
     .toolbar {
+        display: block;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .toolbar h2 {
+        font-size: 18pt;
+        text-align: center;
+    }
+
+    .actions {
         display: none;
     }
 
     .verseList {
-        padding: 0;
-        font-size: 14pt;
+        padding: 2rem 0 0;
+        font-size: 20pt;
         line-height: 2;
     }
 }
