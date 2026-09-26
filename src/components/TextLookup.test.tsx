@@ -12,7 +12,7 @@ describe("TextLookup print preview reference", () => {
         vi.clearAllMocks();
     });
 
-    it("keeps the submitted reference in the preview after the query is edited", async () => {
+    it("defaults to Hebrew and keeps the submitted reference after the query is edited", async () => {
         // Arrange
         const fetchedVerses = new Map([
             [1, { text: "English verse", heText: "בְּרֵאשִׁית" }],
@@ -25,7 +25,6 @@ describe("TextLookup print preview reference", () => {
         fireEvent.change(input, { target: { value: "Micah 1:1-2" } });
         fireEvent.click(screen.getByRole("button", { name: "Look up" }));
         await screen.findByText("Micah 1:1-2");
-        fireEvent.click(screen.getByRole("button", { name: "HE" }));
         await screen.findByText("בְּרֵאשִׁית");
         fireEvent.change(input, { target: { value: "Genesis 2:3" } });
         fireEvent.click(screen.getByRole("button", { name: "Print preview" }));

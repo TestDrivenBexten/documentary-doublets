@@ -14,7 +14,7 @@ export const TextLookup: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [lookupResult, setLookupResult] = useState<LookupResult | null>(null);
-    const [showHebrew, setShowHebrew] = useState(false);
+    const [showHebrew, setShowHebrew] = useState(true);
     const [showPrintPreview, setShowPrintPreview] = useState(false);
 
     useEffect(() => {
