@@ -8,6 +8,10 @@
     font-weight: bold;
 }
 
+.referenceLabel {
+    text-align: center;
+}
+
 .form {
     display: flex;
     gap: 0.4rem;
