@@ -90,6 +90,18 @@ describe("stripHtml", () => {
     expect(result).toBe("בְּרֵאשִׁית");
   });
 
+  it("decodes HTML entities in text", () => {
+    // Arrange
+    const input = "דְּבַר־יְהֹוָ֣ה&thinsp;׀ אֲשֶׁ֣ר";
+
+    // Act
+    const result = stripHtml(input);
+
+    // Assert
+    expect(result).toBe("דְּבַר־יְהֹוָ֣ה ׀ אֲשֶׁ֣ר");
+    expect(result).not.toContain("&thinsp;");
+  });
+
   it("neutralises a script injection attempt", () => {
     // Arrange
     const input = "<script>alert('xss')</script>safe text";

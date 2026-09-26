@@ -8,6 +8,10 @@
     font-weight: bold;
 }
 
+.referenceLabel {
+    text-align: center;
+}
+
 .form {
     display: flex;
     gap: 0.4rem;
@@ -52,6 +56,15 @@
 .langButtonDisabled {
     color: #bbb;
     cursor: not-allowed;
+}
+
+.previewButton {
+    margin-left: auto;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #bbb;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
 }
 
 .verseList {
