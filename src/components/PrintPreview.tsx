@@ -59,7 +59,8 @@ export const PrintPreview: React.FC<PrintPreviewProps> = ({ verseMap, verseRefer
                     {Array.from(verseMap.entries()).map(([verseNumber, texts]) => (
                         <li key={verseNumber} className={styles.verseItem}>
                             <span className={styles.verseNumber} dir="ltr">.{verseNumber}</span>
-                            <span>{texts.heText || texts.text}</span>
+                            <span className={styles.verseText}>{texts.heText || texts.text}</span>
+                            <span className={styles.notesSpace} aria-hidden="true" />
                         </li>
                     ))}
                 </ol>
