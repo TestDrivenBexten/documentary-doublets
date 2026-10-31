@@ -56,6 +56,28 @@ describe("fetchVerseTexts", () => {
     const calledUrl = getFirstCallUrl(mockFetch);
     expect(calledUrl).toContain(encodeURIComponent("Song of Songs 1.1-7"));
   });
+
+  it("strips cantillation from Hebrew text while preserving vowel points", async () => {
+    // Arrange
+    const verseResponse = {
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          title: "Genesis",
+          versions: [
+            { language: "en", versionTitle: "English", text: ["In the beginning"] },
+            { language: "he", versionTitle: "Hebrew", text: ["בְּרֵאשִׁ֖ית"] },
+          ],
+        }),
+    };
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(verseResponse));
+
+    // Act
+    const result = await fetchVerseTexts("Genesis 1:1");
+
+    // Assert
+    expect(result.get(1)?.heText).toBe("בְּרֵאשִׁית");
+  });
 });
 
 // ---------------------------------------------------------------------------

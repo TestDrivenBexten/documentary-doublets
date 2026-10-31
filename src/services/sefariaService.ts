@@ -89,7 +89,7 @@ export async function fetchVerseTexts(
   enTexts.forEach((t, i) => {
     map.set(startVerse + i, {
       text: stripHtml(t),
-      heText: stripHtml(heTexts[i] ?? ""),
+      heText: stripHtml(heTexts[i] ?? "").replace(/[\u0591-\u05AF]/g, ""),
     });
   });
   return map;
